@@ -1,0 +1,19 @@
+====================================
+      COMPROVANTE DE COMPRA
+====================================
+Pedido #1
+Data: 29/10/2025 16:10:31
+
+Cliente: João Silva
+Telefone: 11 945862531
+------------------------------------
+Itens Comprados:
+- 1x Coca-Cola 2L (R$ 12,00) = R$ 12,00
+- 1x Guaraná Antarctica 2L (R$ 11,50) = R$ 11,50
+------------------------------------
+Forma de Pagamento: Pix
+
+TOTAL DO PEDIDO: R$ 23,50
+====================================
+   Obrigado pela preferência!
+====================================
