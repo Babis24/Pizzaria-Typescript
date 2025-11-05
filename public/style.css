@@ -1,730 +1,147 @@
 /* Variáveis CSS para cores e sombras, facilitando a manutenção do tema */
-:root {
-  --primary-color: #ff4500; /* Cor principal, um tom de laranja avermelhado */
-  --background-color: #f4f4f4; /* Cor de fundo geral da página */
-  --card-background: #ffffff; /* Cor de fundo para cartões e modais */
-  --text-color: #333; /* Cor padrão para textos */
-  --shadow-color: rgba(0, 0, 0, 0.1); /* Cor para sombras leves */
-}
-
+:root { --primary-color: #ff4500; /* Cor principal, um tom de laranja avermelhado */ --background-color: #f4f4f4; /* Cor de fundo geral da página */ --card-background: #ffffff; /* Cor de fundo para cartões e modais */ --text-color: #333; /* Cor padrão para textos */ --shadow-color: rgba(0, 0, 0, 0.1); /* Cor para sombras leves */ }
 /* Estilos gerais do corpo da página */
-body {
-  font-family: 'Roboto', sans-serif; /* Fonte padrão */
-  margin: 0; /* Remove margem padrão do body */
-  background-color: var(--background-color); /* Aplica a cor de fundo definida */
-  color: var(--text-color); /* Aplica a cor de texto padrão */
-}
-
+body { font-family: 'Roboto', sans-serif; /* Fonte padrão */ margin: 0; /* Remove margem padrão do body */ background-color: var(--background-color); /* Aplica a cor de fundo definida */ color: var(--text-color); /* Aplica a cor de texto padrão */ }
 /* Estilos do cabeçalho */
-header {
-  background-color: var(--primary-color); /* Fundo com a cor principal */
-  color: white; /* Texto branco */
-  padding: 1rem 2rem; /* Aumentei o padding lateral para dar espaço para logo/carrinho */
-  text-align: center; /* Centraliza o texto (principalmente o h1) */
-  box-shadow: 0 2px 4px var(--shadow-color); /* Sombra suave na parte inferior */
-
-  /* --- INÍCIO DAS MUDANÇAS PARA A LOGO E ALINHAMENTO DO HEADER --- */
-  position: relative; /* Essencial para posicionar os filhos absolutamente */
-  display: flex; /* Habilita flexbox para o header */
-  flex-direction: column; /* Organiza os itens em coluna por padrão (responsividade) */
-  align-items: center; /* Centraliza os itens horizontalmente na coluna */
-  /* --- FIM DAS MUDANÇAS NO HEADER --- */
-}
-
-/* Novo container para a linha superior do cabeçalho (logo, título, carrinho) */
-.header-content {
-  display: flex; /* Habilita flexbox para alinhar logo, título e carrinho */
-  align-items: center; /* Centraliza verticalmente */
-  justify-content: space-between; /* Coloca espaço entre logo, título e carrinho */
-  width: 100%; /* Ocupa a largura total do header */
-  max-width: 1200px; /* Limita a largura para centralizar o conteúdo */
-  margin-bottom: 0.6rem; /* Espaço entre a linha de cima e a navegação */
-  position: relative; /* Para a logo ser posicionada absolutamente dentro dele */
-}
-
+header { background-color: var(--primary-color); /* Fundo com a cor principal */ color: white; /* Texto branco */ padding: 1rem 2rem; /* Aumenta o padding lateral */ text-align: center; /* Centraliza o texto */ box-shadow: 0 2px 4px var(--shadow-color); /* Sombra suave na parte inferior */ position: relative; /* Essencial para posicionar os filhos absolutamente */ display: flex; /* Habilita flexbox para o header */ flex-direction: column; /* Organiza os itens em coluna */ align-items: center; /* Centraliza os itens horizontalmente */ }
+/* Container para a linha superior do cabeçalho */
+.header-content { display: flex; /* Habilita flexbox para alinhar itens */ align-items: center; /* Centraliza verticalmente */ justify-content: space-between; /* Coloca espaço entre os elementos */ width: 100%; /* Ocupa a largura total */ max-width: 1200px; /* Limita a largura para centralizar */ margin-bottom: 0.6rem; /* Espaço inferior */ position: relative; /* Para a logo ser posicionada absolutamente */ }
 /* Estilos do Título Principal (h1) */
-header h1 {
-  margin: 0; /* Remove margens padrão que poderiam empurrar outros elementos */
-  font-size: 2.0rem; /* Exemplo, mantenha o seu */
-  flex-grow: 1; /* Permite que o título ocupe o espaço restante no centro */
-  text-align: center; /* Centraliza o texto do título */
-  color: white; /* Garante que o título seja branco */
-}
-
-.logo-container {
-  display: flex; /*Para alinhar a imagem da logo */
-  align-items: center;
-  position: absolute; /* Posiciona a logo absolutamente em relação ao .header-content */
-  left: 0;
-  top: 95%;
-  transform: translateY(-50%);
-}
-
-.logo {
-  height: 60px; /* Ajuste o tamanho da sua logo para ser mais visível */
-  width: auto; /* Mantém a proporção */
-  border-radius: 50%; /* Para uma logo circular */
-  border-color: #ddd;
-  object-fit: cover; /* Garante que a imagem preencha o espaço */
-}
-
-/* Estilos para a navegação principal no cabeçalho */
-.main-nav {
-  display: flex; /* Usa flexbox para alinhar os itens */
-  gap: 1.5rem; /* Espaçamento entre os links */
-  justify-content: center; /* Centraliza os links horizontalmente */
-  margin-top: 0.5rem; /* Margem superior */
-}
-
+header h1 { margin: 0; /* Remove margens padrão */ font-size: 2.0rem; /* Define o tamanho da fonte */ flex-grow: 1; /* Permite que o título ocupe o espaço restante */ text-align: center; /* Centraliza o texto do título */ color: white; /* Garante que o título seja branco */ }
+/* Container da Logo */
+.logo-container { display: flex; /* Alinha a imagem da logo */ align-items: center; /* Centraliza verticalmente */ position: absolute; /* Posiciona absolutamente em relação ao pai */ left: 0.5rem; /* Distância da esquerda */ top: 100%; /* Posiciona abaixo do container pai */ transform: translateY(-50%); /* Ajusta a posição vertical */ }
+/* Estilos da Logo */
+.logo { height: 100px; /* Define a altura */ width: 100px; /* Define a largura */ border-radius: 100%; /* Torna a logo circular */ border-color: #ddd; /* Define a cor da borda */ object-fit: cover; /* Garante que a imagem preencha o espaço */ }
+/* Estilos para a navegação principal */
+.main-nav { display: flex; /* Usa flexbox para alinhar os itens */ gap: 1.5rem; /* Espaçamento entre os links */ justify-content: center; /* Centraliza os links horizontalmente */ margin-top: 0.5rem; /* Margem superior */ }
 /* Estilos para os links de navegação */
-.nav-link {
-  color: white; /* Cor do texto do link */
-  text-decoration: none; /* Remove sublinhado padrão */
-  font-weight: bold; /* Adiciona negrito para destaque */
-  padding: 0.5rem 1rem; /* Aumenta a área clicável */
-  border-radius: 5px; /* Cantos arredondados */
-  transition: background-color 0.3s ease; /* Transição suave no hover */
-}
-
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente no hover */
-}
-
-/* -------------------------------------------------------------------------- */
-/*                        Modal de Edição de Produto                          */
-/* -------------------------------------------------------------------------- */
-
-/* Estilo do modal de edição de produto (inicialmente oculto) */
-#edit-product-modal {
-  display: none; /* Oculto por padrão */
-  position: fixed; /* Posição fixa para cobrir a tela */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; /* Ocupa 100% da tela */
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */
-  z-index: 2000; /* Garante que fique acima de outros elementos */
-  justify-content: center;
-  align-items: center; /* Centraliza o conteúdo via JS (quando 'show' for adicionado) */
-}
-
-/* Classe para mostrar o modal de edição (adicionada via JavaScript) */
-#edit-product-modal.show {
-  display: flex; /* Altera para flex para exibir e centralizar */
-}
-
-/* Estilo da caixa de conteúdo dentro do modal de edição */
-#edit-product-modal .modal-content {
-  background-color: var(--card-background); /* Fundo branco */
-  padding: 30px; /* Preenchimento interno */
-  border-radius: 12px; /* Cantos arredondados */
-  width: 70%; /* Largura relativa */
-  max-width: 350px; /* Largura máxima */
-  position: relative; /* Para posicionar o botão de fechar */
-  box-shadow: 0 8px 16px var(--shadow-color); /* Sombra mais pronunciada */
-  overflow-y: auto; /* Adiciona scroll vertical se o conteúdo for muito grande */
-  max-height: 90vh; /* Altura máxima para não exceder a viewport */
-}
-
-/* Título do modal de edição */
-#edit-product-modal h2 {
-  text-align: center; /* Centraliza o título */
-  color: var(--primary-color); /* Cor principal */
-  margin-bottom: 25px; /* Margem inferior */
-}
-
-/* Grupo de formulário (label + input) */
-#edit-product-modal .form-group {
-  margin-bottom: 12px; /* Espaçamento entre grupos */
-}
-
-/* Rótulos dos campos do formulário */
-#edit-product-modal label {
-  display: block; /* Ocupa a largura total */
-  margin-bottom: 10px; /* Espaçamento abaixo do rótulo */
-  font-weight: bold; /* Texto em negrito */
-  color: var(--text-color); /* Cor de texto padrão */
-}
-
-/* Estilos para inputs de texto, número e selects no modal de edição */
-#edit-product-modal input[type="text"],
-#edit-product-modal input[type="number"],
-#edit-product-modal select {
-  width: 100%; /* Ocupa a largura total do container */
-  padding: 12px 15px; /* Preenchimento interno */
-  border: 1px solid #ddd; /* Borda cinza clara */
-  border-radius: 8px; /* Cantos arredondados */
-  box-sizing: border-box; /* Inclui padding e borda na largura total */
-  color: var(--text-color); /* Cor do texto */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para foco */
-}
-
-/* Estilos ao focar em inputs/selects */
-#edit-product-modal input:focus,
-#edit-product-modal select:focus {
-  border-color: var(--primary-color); /* Borda com a cor principal */
-  outline: none; /* Remove o contorno padrão do navegador */
-  box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2); /* Sombra suave da cor principal */
-}
-
-/* Botão de submit dentro do modal de edição */
-#edit-product-modal button[type="submit"] {
-  width: 100%; /* Largura total */
-  padding: 10px; /* Preenchimento */
-  background-color: #ff4500; /* Cor de fundo */
-  color: white; /* Texto branco */
-  border: none; /* Sem borda */
-  border-radius: 8px; /* Cantos arredondados */
-  font-size: 1.2em; /* Tamanho da fonte */
-  cursor: pointer; /* Cursor de ponteiro */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
-  margin-top: 25px; /* Margem superior */
-}
-
-/* Efeito hover no botão de submit */
-#edit-product-modal button[type="submit"]:hover {
-  background-color: #d14410; /* Escurece a cor de fundo */
-  transform: translateY(-2px); /* Eleva o botão ligeiramente */
-}
-
-/* Botão de fechar do modal de edição */
-#edit-product-modal .close-button {
-  position: absolute; /* Posição absoluta em relação ao modal-content */
-  top: 15px; /* Distância do topo */
-  right: 20px; /* Distância da direita */
-  color: #888; /* Cor cinza */
-  font-size: 30px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
-  cursor: pointer; /* Cursor de ponteiro */
-  transition: color 0.2s ease; /* Transição de cor suave */
-}
-
-/* Efeito hover/focus no botão de fechar */
-#edit-product-modal .close-button:hover,
-#edit-product-modal .close-button:focus {
-  color: #333; /* Escurece a cor */
-}
-
-/* -------------------------------------------------------------------------- */
-/*                         Modal do Carrinho de Compras                       */
-/* -------------------------------------------------------------------------- */
-
-/* Modal do Carrinho - Oculto por padrão, centralizado e sobrepondo tudo */
-#cart-modal {
-  display: none; /* Oculto por padrão */
-  position: fixed; /* Posição fixa para cobrir a tela */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; /* Ocupa 100% da tela */
-  background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */
-  z-index: 2000; /* Garante que fique acima de outros elementos */
-  justify-content: center;
-  align-items: center; /* Centraliza o conteúdo via JS (quando 'show' for adicionado) */
-}
-
-/* Classe para mostrar o modal do carrinho (adicionada via JavaScript) */
-#cart-modal.show {
-  display: flex; /* Altera para flex para exibir e centralizar */
-}
-
-/* Conteúdo do Modal do Carrinho (a caixa branca) */
-#cart-modal .modal-content {
-  background-color: var(--card-background); /* Fundo branco */
-  padding: 30px; /* Preenchimento interno */
-  border-radius: 12px; /* Cantos arredondados */
-  width: 90%; /* Largura relativa */
-  max-width: 400px; /* Largura máxima (um pouco maior que o de edição) */
-  position: relative; /* Para posicionar o botão de fechar */
-  box-shadow: 0 8px 16px var(--shadow-color); /* Sombra mais pronunciada */
-  overflow-y: auto; /* Permite scroll se o conteúdo for grande */
-  max-height: 90vh; /* Altura máxima para não exceder a viewport */
-}
-
-/* Botão de fechar do modal do carrinho */
-#cart-modal .close-button {
-  position: absolute; /* Posição absoluta em relação ao modal-content */
-  top: 15px; /* Distância do topo */
-  right: 20px; /* Distância da direita */
-  color: #888; /* Cor cinza */
-  font-size: 30px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
-  cursor: pointer; /* Cursor de ponteiro */
-  transition: color 0.2s ease; /* Transição de cor suave */
-}
-
-/* Efeito hover/focus no botão de fechar do carrinho */
-#cart-modal .close-button:hover,
-#cart-modal .close-button:focus {
-  color: #333; /* Escurece a cor */
-}
-
-/* Título do Carrinho */
-#cart-modal h2 {
-  text-align: center; /* Centraliza o título */
-  color: var(--primary-color); /* Cor principal */
-  margin-bottom: 25px; /* Margem inferior */
-  font-size: 1.8em; /* Tamanho da fonte maior */
-}
-
+.nav-link { color: white; /* Cor do texto do link */ text-decoration: none; /* Remove sublinhado padrão */ font-weight: bold; /* Adiciona negrito */ padding: 0.5rem 1rem; /* Aumenta a área clicável */ border-radius: 5px; /* Cantos arredondados */ transition: background-color 0.3s ease; /* Transição suave no hover */ }
+.nav-link:hover { background-color: rgba(255, 255, 255, 0.2); /* Fundo semi-transparente no hover */ }
+/* Estilo unificado para o fundo dos modais */
+#edit-product-modal, #cart-modal { display: none; /* Oculto por padrão */ position: fixed; /* Posição fixa para cobrir a tela */ top: 0; /* Cobre a partir do topo */ left: 0; /* Cobre a partir da esquerda */ width: 100%; /* Ocupa 100% da largura */ height: 100%; /* Ocupa 100% da altura */ background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente escuro */ z-index: 2000; /* Garante que fique acima de outros elementos */ justify-content: center; /* Centraliza horizontalmente o conteúdo */ align-items: center; /* Centraliza verticalmente o conteúdo */ }
+/* Classe para mostrar os modais */
+#edit-product-modal.show, #cart-modal.show { display: flex; /* Altera para flex para exibir e centralizar */ }
+/* Estilo unificado para o conteúdo dos modais */
+#edit-product-modal .modal-content, #cart-modal .modal-content { background-color: var(--card-background); /* Fundo branco */ padding: 30px; /* Preenchimento interno */ border-radius: 12px; /* Cantos arredondados */ position: relative; /* Para posicionar o botão de fechar */ box-shadow: 0 8px 16px var(--shadow-color); /* Sombra mais pronunciada */ overflow-y: auto; /* Adiciona scroll vertical se necessário */ max-height: 90vh; /* Altura máxima para não exceder a viewport */ }
+/* Larguras específicas para cada modal */
+#edit-product-modal .modal-content { width: 70%; /* Largura relativa */ max-width: 350px; /* Largura máxima */ }
+#cart-modal .modal-content { width: 90%; /* Largura relativa */ max-width: 400px; /* Largura máxima */ }
+/* Títulos dos modais */
+#edit-product-modal h2, #cart-modal h2 { text-align: center; /* Centraliza o título */ color: var(--primary-color); /* Cor principal */ margin-bottom: 25px; /* Margem inferior */ }
+#cart-modal h2 { font-size: 1.8em; /* Tamanho da fonte maior para o carrinho */ }
+/* Botão de fechar dos modais */
+.close-button { position: absolute; /* Posição absoluta */ top: 15px; /* Distância do topo */ right: 20px; /* Distância da direita */ color: #888; /* Cor cinza */ font-size: 30px; /* Tamanho da fonte */ font-weight: bold; /* Negrito */ cursor: pointer; /* Cursor de ponteiro */ transition: color 0.2s ease; /* Transição de cor suave */ }
+.close-button:hover, .close-button:focus { color: #333; /* Escurece a cor no hover/focus */ }
+/* Grupo de formulário e rótulos */
+.form-group { margin-bottom: 12px; /* Espaçamento entre grupos */ }
+label { display: block; /* Ocupa a largura total */ margin-bottom: 10px; /* Espaçamento abaixo do rótulo */ font-weight: bold; /* Texto em negrito */ color: var(--text-color); /* Cor de texto padrão */ }
+/* Inputs, e selects dos modais e checkout */
+input[type="text"], input[type="number"], input[type="tel"], select { width: 100%; /* Ocupa a largura total */ padding: 12px 15px; /* Preenchimento interno */ border: 1px solid #ddd; /* Borda cinza clara */ border-radius: 8px; /* Cantos arredondados */ box-sizing: border-box; /* Inclui padding e borda na largura total */ color: var(--text-color); /* Cor do texto */ transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave para foco */ }
+input:focus, select:focus { border-color: var(--primary-color); /* Borda com a cor principal */ outline: none; /* Remove o contorno padrão */ box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2); /* Sombra suave da cor principal */ }
+/* Botões de submissão */
+button[type="submit"], #checkout-btn { width: 100%; /* Largura total */ padding: 15px; /* Preenchimento */ background-color: #ff4500; /* Cor de fundo */ color: white; /* Texto branco */ border: none; /* Sem borda */ border-radius: 8px; /* Cantos arredondados */ font-size: 1.2em; /* Tamanho da fonte */ cursor: pointer; /* Cursor de ponteiro */ transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */ margin-top: 25px; /* Margem superior */ }
+button[type="submit"]:hover, #checkout-btn:hover { background-color: #d14410; /* Escurece a cor de fundo */ transform: translateY(-2px); /* Eleva o botão ligeiramente */ }
+#checkout-btn:disabled { background-color: #aaa; /* Cor cinza mais clara */ cursor: not-allowed; /* Cursor de "não permitido" */ transform: none; /* Remove a elevação */ }
 /* Estilo para cada item individual no carrinho */
-.cart-item {
-  display: flex; /* Usa flexbox para alinhar nome, preço e botão */
-  justify-content: space-between; /* Espaço entre os elementos */
-  align-items: center; /* Alinha verticalmente ao centro */
-  padding: 10px 0; /* Preenchimento superior e inferior */
-  border-bottom: 1px solid #eee; /* Borda inferior para separar itens */
-}
-
-/* Remove a borda do último item do carrinho */
-.cart-item:last-child {
-  border-bottom: none;
-}
-
-/* Permite que o nome do item ocupe o espaço disponível */
-.cart-item span:first-child {
-  flex-grow: 1;
-}
-
+.cart-item { display: flex; /* Usa flexbox para alinhar */ justify-content: space-between; /* Espaço entre os elementos */ align-items: center; /* Alinha verticalmente ao centro */ padding: 10px 0; /* Preenchimento superior e inferior */ border-bottom: 1px solid #eee; /* Borda inferior para separar itens */ }
+.cart-item:last-child { border-bottom: none; /* Remove a borda do último item */ }
+.cart-item span:first-child { flex-grow: 1; /* Permite que o nome do item ocupe o espaço */ }
 /* Botão para remover item do carrinho */
-.remove-item-btn {
-  background-color: #ff6b6b; /* Cor de fundo vermelha */
-  color: white; /* Texto branco */
-  border: none; /* Sem borda */
-  border-radius: 50%; /* Torna o botão redondo */
-  width: 28px;
-  height: 28px; /* Dimensões fixas */
-  font-size: 16px; /* Tamanho da fonte do "X" */
-  font-weight: bold; /* Negrito */
-  cursor: pointer; /* Cursor de ponteiro */
-  margin-left: 15px; /* Margem à esquerda */
+.remove-item-btn { background-color: #ff6b6b; /* Cor de fundo vermelha */ color: white; /* Texto branco */ border: none; /* Sem borda */ border-radius: 50%; /* Torna o botão redondo */ width: 28px; /* Largura fixa */ height: 28px; /* Altura fixa */ font-size: 16px; /* Tamanho da fonte */ font-weight: bold; /* Negrito */ cursor: pointer; /* Cursor de ponteiro */ margin-left: 15px; /* Margem à esquerda */ display: flex; /* Habilita flexbox */ justify-content: center; /* Centraliza horizontalmente */ align-items: center; /* Centraliza verticalmente */ transition: background-color 0.2s; /* Transição suave de cor */ }
+.remove-item-btn:hover { background-color: #e04848; /* Escurece a cor */ }
+/* Total do carrinho */
+.cart-total { text-align: right; /* Alinha o texto à direita */ font-size: 1.4em; /* Tamanho da fonte */ margin-top: 20px; /* Margem superior */ padding-top: 15px; /* Preenchimento superior */ border-top: 1px solid #eee; /* Linha divisória antes do total */ font-weight: bold; /* Negrito */ color: var(--text-color); /* Cor de texto padrão */ }
+#cart-total-value { color: var(--primary-color); /* Cor principal para o valor */ }
+/* Seção de Checkout */
+#checkout-section { margin-top: 20px; /* Margem superior */ }
+#checkout-section hr { border: none; /* Remove borda padrão */ border-top: 1px solid #ddd; /* Adiciona uma borda superior como linha */ margin: 20px 0; /* Margem superior e inferior */ }
+#checkout-section h3 { text-align: center; /* Centraliza o título */ color: var(--text-color); /* Cor de texto padrão */ margin-bottom: 20px; /* Margem inferior */ font-size: 1.5em; /* Tamanho da fonte */ }
+/* Filtros de Produtos */
+.filter-container { display: flex; /* Usa flexbox para alinhar */ justify-content: center; /* Centraliza os botões */ gap: 1rem; /* Espaçamento entre os botões */ padding: 1rem; /* Preenchimento interno */ background-color: var(--card-background); /* Fundo branco */ border-bottom: 1px solid #eee; /* Borda inferior */ flex-wrap: wrap; /* Permite quebra de linha */ }
+.filter-btn { padding: 0.6rem 1.2rem; /* Preenchimento */ border-radius: 20px; /* Cantos arredondados */ border: 1px solid var(--primary-color); /* Borda com a cor principal */ background-color: transparent; /* Fundo transparente */ color: var(--primary-color); /* Cor do texto */ font-weight: bold; /* Negrito */ cursor: pointer; /* Cursor de ponteiro */ transition: all 0.2s; /* Transição suave */ }
+.filter-btn:hover { background-color: #ffe8e0; /* Fundo mais claro no hover */ }
+.filter-btn.active { background-color: var(--primary-color); /* Fundo com a cor principal */ color: white; /* Texto branco */ }
+/* Seção de Produtos */
+#menu-container { padding: 2rem; /* Preenchimento */ display: none; /* Começa oculto */ justify-content: center; /* Centraliza horizontalmente */ }
+.products-section { width: 100%; /* Largura total */ max-width: 1200px; /* Largura máxima */ background-color: var(--card-background); /* Fundo branco */ border-radius: 8px; /* Cantos arredondados */ padding: 1.5rem; /* Preenchimento interno */ box-shadow: 0 4px 8px var(--shadow-color); /* Sombra suave */ }
+.products-section h2 { text-align: center; /* Centraliza o texto */ margin-top: 0; /* Remove margem superior */ border-bottom: 2px solid var(--primary-color); /* Borda inferior com cor principal */ padding-bottom: 1rem; /* Preenchimento abaixo */ margin-bottom: 1.5rem; /* Margem inferior */ }
+.products-grid { display: flex; /* Usa flexbox */ flex-wrap: wrap; /* Permite quebra de linha */ justify-content: center; /* Centraliza os cartões */ gap: 1.5rem; /* Espaçamento entre os cartões */ }
+/* Cartão individual do produto */
+.produto-card { background-color: var(--card-background); /* Fundo branco */ border-radius: 8px; /* Cantos arredondados */ box-shadow: 0 4px 8px var(--shadow-color); /* Sombra suave */ overflow: hidden; /* Garante que o conteúdo não saia */ width: 300px; /* Largura fixa */ transition: transform 0.2s; /* Transição suave */ display: flex; /* Usa flexbox */ flex-direction: column; /* Organiza em coluna */ }
+.produto-card:hover { transform: translateY(-5px); /* Eleva o cartão no hover */ }
+/* Conteúdo do cartão */
+.info-container { padding: 0 1rem; /* Preenchimento lateral */ flex-grow: 1; /* Ocupa o espaço restante */ }
+.produto-card .categoria { background-color: var(--primary-color); /* Fundo com cor principal */ color: white; /* Texto branco */ padding: 0.2rem 0.5rem; /* Preenchimento */ font-size: 0.8rem; /* Tamanho da fonte */ text-transform: uppercase; /* Texto em maiúsculas */ display: inline-block; /* Ocupa apenas o espaço do conteúdo */ margin-top: 1rem; /* Margem superior */ border-radius: 4px; /* Cantos arredondados */ }
+.produto-card .nome { font-size: 1.5rem; /* Tamanho da fonte */ font-weight: 700; /* Negrito */ margin: 0.5rem 0; /* Margem vertical */ }
+.produto-card .descricao { font-size: 0.9rem; /* Tamanho da fonte */ color: #666; /* Cor cinza */ min-height: 40px; /* Altura mínima */ margin-bottom: 1rem; /* Margem inferior */ }
+/* Rodapé do cartão */
+.card-footer { display: flex; /* Usa flexbox */ justify-content: space-between; /* Espaço entre preço e ações */ align-items: center; /* Alinha verticalmente */ padding: 1rem; /* Preenchimento */ border-top: 1px solid #eee; /* Borda superior */ }
+.produto-card .preco { font-size: 1.2rem; /* Tamanho da fonte */ font-weight: 700; /* Negrito */ color: var(--primary-color); /* Cor principal */ line-height: 1.2; }
+/* Ações do rodapé do cartão */
+.footer-actions { display: flex; /* Usa flexbox */ gap: 0.5rem; /* Espaçamento entre os botões */ }
+.footer-actions button { border: none; /* Sem borda */ border-radius: 50%; /* Torna o botão redondo */ width: 40px; /* Largura fixa */ height: 40px; /* Altura fixa */ font-size: 1.1rem; /* Tamanho da fonte do ícone */ cursor: pointer; /* Cursor de ponteiro */ color: white; /* Cor do ícone */ transition: background-color 0.2s; /* Transição suave de cor */ display: flex; /* Usa flexbox */ align-items: center; /* Centraliza verticalmente */ justify-content: center; /* Centraliza horizontalmente */ padding: 0; /* Remove preenchimento */ }
+/* Botões de ação específicos */
+.add-to-cart-btn { background-color: var(--primary-color); /* Cor principal */ }
+.add-to-cart-btn:hover { background-color: #e63e00; /* Escurece a cor no hover */ }
+.delete-btn { background-color: #e74c3c; /* Cor vermelha */ }
+.delete-btn:hover { background-color: #c0392b; /* Escurece a cor no hover */ }
+.edit-btn { background-color: #3498db; /* Cor azul */ }
+.edit-btn:hover { background-color: #2980b9; /* Escurece a cor no hover */ }
+/* Ícone flutuante do carrinho */
+.cart-icon { position: absolute; /* Posição absoluta em relação ao header */ top: 45%; /* Centraliza verticalmente */ right: 20%; /* Alinha à direita */ transform: translateY(-50%); /* Ajuste fino para centralização */ font-size: 3.0rem; /* Tamanho do ícone */ cursor: pointer; /* Cursor de ponteiro */ color: white; /* Cor do ícone */ display: flex; /* Para alinhar o contador */ align-items: center; /* Centraliza verticalmente */ z-index: 1000; /* Garante que fique acima */ background-color: white; /* Fundo branco */ border-radius: 50%; /* Fundo redondo */ padding: 0.5rem; /* Preenchimento */ }
+/* Contador de itens no carrinho */
+.cart-count { position: absolute; /* Posição absoluta em relação ao ícone */ top: -5px; /* Ajuste para cima */ right: -5px; /* Ajuste para a direita */ background-color: red; /* Fundo vermelho */ color: white; /* Texto branco */ border-radius: 50%; /* Redondo */ padding: 2px 6px; /* Preenchimento */ font-size: 0.8rem; /* Tamanho da fonte */ font-weight: bold; /* Negrito */ line-height: 1; /* Garante alinhamento vertical */ min-width: 18px; /* Largura mínima */ text-align: center; /* Centraliza o número */ box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Sombra para destaque */ }
+/* Mensagem de carregamento */
+#loading { font-size: 1.5rem; /* Tamanho da fonte */ color: #888; /* Cor cinza */ text-align: center; /* Centraliza o texto */ padding: 2rem; /* Preenchimento */ }
+/* Barra de pesquisa de produtos */
+.search-container {
+  padding: 1rem 2rem;
+  background-color: var(--card-background);
   display: flex;
   justify-content: center;
-  align-items: center; /* Centraliza o "X" dentro do botão */
-  transition: background-color 0.2s; /* Transição suave de cor */
+  border-bottom: 1px solid #eee;
 }
-
-/* Efeito hover no botão de remover item */
-.remove-item-btn:hover {
-  background-color: #e04848; /* Escurece a cor */
-}
-
-/* Total do carrinho */
-.cart-total {
-  text-align: right; /* Alinha o texto à direita */
-  font-size: 1.4em; /* Tamanho da fonte */
-  margin-top: 20px; /* Margem superior */
-  padding-top: 15px; /* Preenchimento superior */
-  border-top: 1px solid #eee; /* Linha divisória antes do total */
-  font-weight: bold; /* Negrito */
-  color: var(--text-color); /* Cor de texto padrão */
-}
-
-/* Valor total do carrinho */
-#cart-total-value {
-  color: var(--primary-color); /* Cor principal */
-}
-
-/* Seção de Checkout */
-#checkout-section {
-  margin-top: 20px; /* Margem superior */
-}
-
-/* Linha horizontal no checkout */
-#checkout-section hr {
-  border: none; /* Remove borda padrão */
-  border-top: 1px solid #ddd; /* Adiciona uma borda superior como linha */
-  margin: 20px 0; /* Margem superior e inferior */
-}
-
-/* Título da seção de checkout */
-#checkout-section h3 {
-  text-align: center; /* Centraliza o título */
-  color: var(--text-color); /* Cor de texto padrão */
-  margin-bottom: 20px; /* MargemH inferior */
-  font-size: 1.5em; /* Tamanho da fonte */
-}
-
-/* Grupos de formulário (label + select) dentro do checkout */
-#checkout-section .form-group {
-  margin-bottom: 15px; /* Espaçamento entre grupos */
-}
-
-/* Rótulos dos campos no checkout */
-#checkout-section label {
-  display: block; /* Ocupa a largura total */
-  margin-bottom: 8px; /* Espaçamento abaixo do rótulo */
-  font-weight: bold; /* Negrito */
-  color: var(--text-color); /* Cor de texto padrão */
-}
-
-/* Estilos para selects no checkout */
-#checkout-section select {
-  width: 100%; /* Largura total */
-  padding: 10px 15px; /* Preenchimento */
-  border: 1px solid #ccc; /* Borda cinza */
-  border-radius: 8px; /* Cantos arredondados */
-  box-sizing: border-box; /* Inclui padding e borda na largura total */
-  font-size: 1em; /* Tamanho da fonte */
-  color: var(--text-color); /* Cor do texto */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transições suaves */
-}
-
-/* Efeito de foco nos selects do checkout */
-#checkout-section select:focus {
-  border-color: var(--primary-color); /* Borda com a cor principal */
-  outline: none; /* Remove contorno padrão */
-  box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2); /* Sombra suave */
-}
-
-/* Botão de Finalizar Pedido */
-#checkout-btn {
-  width: 100%; /* Largura total */
-  padding: 15px; /* Preenchimento */
-  background-color: #ff4500; /* Cor de fundo */
-  color: white; /* Texto branco */
-  border: none; /* Sem borda */
-  border-radius: 8px; /* Cantos arredondados */
-  font-size: 1.3em; /* Tamanho da fonte */
-  cursor: pointer; /* Cursor de ponteiro */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
-  margin-top: 25px; /* Margem superior */
-}
-
-/* Efeito hover no botão de finalizar pedido */
-#checkout-btn:hover {
-  background-color: #d14410; /* Escurece a cor */
-  transform: translateY(-2px); /* Eleva o botão ligeiramente */
-}
-
-/* Estilo para botão de finalizar pedido desabilitado */
-#checkout-btn:disabled {
-  background-color: #aaa; /* Cor cinza mais clara */
-  cursor: not-allowed; /* Cursor de "não permitido" */
-  transform: none; /* Remove a elevação */
-}
-
-/* -------------------------------------------------------------------------- */
-/*                            Filtros de Produtos                             */
-/* -------------------------------------------------------------------------- */
-
-/* Container dos botões de filtro */
-.filter-container {
-  display: flex; /* Usa flexbox para alinhar os botões */
-  justify-content: center; /* Centraliza os botões */
-  gap: 1rem; /* Espaçamento entre os botões */
-  padding: 1rem 1rem; /* Preenchimento interno */
-  background-color: var(--card-background); /* Fundo branco */
-  border-bottom: 1px solid #eee; /* Borda inferior */
-  flex-wrap: wrap; /* Permite que os botões quebrem linha em telas menores */
-}
-
-/* Botões de filtro */
-.filter-btn {
-  padding: 0.6rem 1.2rem; /* Preenchimento */
-  border-radius: 20px; /* Cantos bem arredondados (formato pílula) */
-  border: 1px solid var(--primary-color); /* Borda com a cor principal */
-  background-color: transparent; /* Fundo transparente */
-  color: var(--primary-color); /* Cor do texto principal */
-  font-weight: bold; /* Negrito */
-  cursor: pointer; /* Cursor de ponteiro */
-  transition: all 0.2s; /* Transição suave para todas as propriedades */
-}
-
-/* Efeito hover nos botões de filtro */
-.filter-btn:hover {
-  background-color: #ffe8e0; /* Fundo mais claro da cor principal */
-}
-
-/* Estilo para o botão de filtro ativo/selecionado */
-.filter-btn.active {
-  background-color: var(--primary-color); /* Fundo com a cor principal */
-  color: white; /* Texto branco */
-}
-
-/* -------------------------------------------------------------------------- */
-/*                              Seção de Produtos                             */
-/* -------------------------------------------------------------------------- */
-
-/* Container principal da seção de menu/produtos */
-#menu-container {
-  padding: 2rem; /* Preenchimento */
-  display: flex; /* Usa flexbox para centralizar a seção */
-  justify-content: center; /* Centraliza horizontalmente */
-}
-
-/* Seção dos produtos em si */
-.products-section {
-  width: 100%; /* Largura total */
-  max-width: 1200px; /* Largura máxima */
-  background-color: var(--card-background); /* Fundo branco */
-  border-radius: 8px; /* Cantos arredondados */
-  padding: 1.5rem; /* Preenchimento interno */
-  box-shadow: 0 4px 8px var(--shadow-color); /* Sombra suave */
-}
-
-/* Título da seção de produtos */
-.products-section h2 {
-  text-align: center; /* Centraliza o texto */
-  margin-top: 0; /* Remove margem superior padrão */
-  border-bottom: 2px solid var(--primary-color); /* Borda inferior com a cor principal */
-  padding-bottom: 1rem; /* Preenchimento abaixo do título */
-  margin-bottom: 1.5rem; /* Margem inferior */
-}
-
-/* Grid de produtos */
-.products-grid {
-  display: flex; /* Usa flexbox para os cartões de produto */
-  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-  justify-content: center; /* Centraliza os cartões horizontalmente */
-  gap: 1.5rem; /* Espaçamento entre os cartões */
-}
-
-/* Cartão individual do produto */
-.produto-card {
-  background-color: var(--card-background); /* Fundo branco */
-  border-radius: 8px; /* Cantos arredondados */
-  box-shadow: 0 4px 8px var(--shadow-color); /* Sombra suave */
-  overflow: hidden; /* Garante que a imagem não saia dos limites */
-  width: 300px; /* Largura fixa do cartão */
-  transition: transform 0.2s; /* Transição suave para o hover */
-  display: flex;
-  flex-direction: column; /* Organiza o conteúdo em coluna */
-}
-
-/* Efeito hover no cartão do produto */
-.produto-card:hover {
-  transform: translateY(-5px); /* Eleva o cartão ligeiramente */
-}
-
-/* Container de informações dentro do cartão */
-.info-container {
-  padding: 0 1rem; /* Preenchimento lateral */
-  flex-grow: 1; /* Permite que ocupe o espaço restante */
-}
-
-/* Categoria do produto */
-.produto-card .categoria {
-  background-color: var(--primary-color); /* Fundo com a cor principal */
-  color: white; /* Texto branco */
-  padding: 0.2rem 0.5rem; /* Preenchimento */
-  font-size: 0.8rem; /* Tamanho da fonte menor */
-  text-transform: uppercase; /* Texto em maiúsculas */
-  display: inline-block; /* Ocupa apenas o espaço do conteúdo */
-  margin-top: 1rem; /* Margem superior */
-  border-radius: 4px; /* Cantos levemente arredondados */
-}
-
-/* Nome do produto */
-.produto-card .nome {
-  font-size: 1.5rem; /* Tamanho da fonte */
-  font-weight: 700; /* Negrito */
-  margin: 0.5rem 0; /* Margem superior e inferior */
-}
-
-/* Descrição do produto */
-.produto-card .descricao {
-  font-size: 0.9rem; /* Tamanho da fonte */
-  color: #666; /* Cor cinza */
-  min-height: 40px; /* Altura mínima para manter consistência */
-  margin-bottom: 1rem; /* Margem inferior */
-}
-
-/* Rodapé do cartão do produto */
-.card-footer {
-  display: flex; /* Usa flexbox */
-  justify-content: space-between; /* Espaço entre preço e ações */
-  align-items: center; /* Alinha verticalmente */
-  padding: 1rem; /* Preenchimento */
-  border-top: 1px solid #eee; /* Borda superior */
-}
-
-/* Preço do produto */
-.produto-card .preco {
-  font-size: 1.2rem; /* Tamanho da fonte */
-  font-weight: 700; /* Negrito */
-  color: var(--primary-color); /* Cor principal */
-}
-
-/* Ações (botões) no rodapé do cartão */
-.footer-actions {
-  display: flex; /* Usa flexbox */
-  gap: 0.5rem; /* Espaçamento entre os botões */
-}
-
-/* Estilos gerais para os botões de ação do cartão */
-.footer-actions button {
-  border: none; /* Sem borda */
-  border-radius: 50%; /* Torna o botão redondo */
-  width: 40px;
-  height: 40px; /* Dimensões fixas */
-  font-size: 1.1rem; /* Tamanho da fonte do ícone */
-  cursor: pointer; /* Cursor de ponteiro */
-  color: white; /* Cor do ícone */
-  transition: background-color 0.2s; /* Transição suave de cor */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centraliza o ícone */
-  padding: 0; /* Remove preenchimento padrão */
-}
-
-/* Botão "Adicionar ao Carrinho" */
-.add-to-cart-btn {
-  background-color: var(--primary-color); /* Cor principal */
-}
-
-/* Efeito hover no botão "Adicionar ao Carrinho" */
-.add-to-cart-btn:hover {
-  background-color: #e63e00; /* Escurece a cor */
-}
-
-/* Botão "Deletar" */
-.delete-btn {
-  background-color: #e74c3c; /* Cor vermelha */
-}
-
-/* Efeito hover no botão "Deletar" */
-.delete-btn:hover {
-  background-color: #c0392b; /* Escurece a cor */
-}
-
-/* Botão "Editar" */
-.edit-btn {
-  background-color: #3498db; /* Cor azul */
-}
-
-/* Efeito hover no botão "Editar" */
-.edit-btn:hover {
-  background-color: #2980b9; /* Escurece a cor */
-}
-
-/* Mensagem de carregamento */
-#loading {
-  font-size: 1.5rem; /* Tamanho da fonte */
-  color: #888; /* Cor cinza */
-  text-align: center; /* Centraliza o texto */
-  padding: 2rem; /* Preenchimento */
-}
-/* -------------------------------------------------------------------------- */
-/*                                Ícone do Carrinho                           */
-/* -------------------------------------------------------------------------- */
-
-/* Ícone flutuante do carrinho */
-.cart-icon {
-  /* Mudei de 'fixed' para 'absolute' para posicionar em relação ao 'header' */
-  position: absolute;
-  top: 45%; /* Centraliza verticalmente em relação ao header */
-  right: 2rem; /* Alinha à direita do header com um espaçamento */
-  transform: translateY(-50%); /* Ajuste fino para centralização vertical exata */
-  font-size: 2.0rem; /* Aumentei um pouco o tamanho do ícone */
-  cursor: pointer; /* Cursor de ponteiro */
-  color: white; /* Garante que o ícone seja branco */
-  display: flex; /* Para alinhar o ícone e o contador */
-  align-items: center;
-  z-index: 1000; /* Garante que fique acima de outros elementos */
-  background-color: white; /* Adiciona fundo branco */
-  border-radius: 50%; /* Torna o fundo redondo */
-  padding: 0.5rem; /* Adiciona um pouco de preenchimento para o círculo branco */
-}
-/* Contador de itens no carrinho (número vermelho) */
-.cart-count {
-  position: absolute; /* Posição absoluta em relação ao .cart-icon */
-  top: -5px; /* Ajuste para cima do ícone */
-  right: -5px; /* Ajuste para a direita do ícone */
-  background-color: red; /* Fundo vermelho */
-  color: white; /* Texto branco */
-  border-radius: 50%; /* Redondo */
-  padding: 2px 6px; /* Preenchimento */
-  font-size: 0.8rem; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
-  line-height: 1; /* Garante que o texto fique centralizado */
-  min-width: 18px; /* Largura mínima para um bom círculo */
-  text-align: center; /* Centraliza o número */
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2); /* Sombra para destaque */
-}
-
-/* -------------------------------------------------------------------------- */
-/*             Estilos de Modal Genéricos (alguns duplicados/antigos)         */
-/* -------------------------------------------------------------------------- */
-
-/* Estilo geral para modais (pode ser redundante com #edit-product-modal e #cart-modal) */
-.modal {
-  display: none; /* Oculto por padrão */
-  position: fixed; /* Posição fixa */
-  z-index: 2000; /* Alto z-index */
-  left: 0;
-  top: 0;
+#search-input {
   width: 100%;
-  height: 100%; /* Ocupa 100% da tela */
-  overflow: auto; /* Adiciona scroll se necessário */
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  max-width: 500px;
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
 }
-
-/* Conteúdo geral do modal (pode ser redundante) */
-.modal-content {
-  background-color: #fefefe; /* Fundo branco */
-  margin: 15% auto; /* Centraliza verticalmente (aproximadamente) e horizontalmente */
-  padding: 20px; /* Preenchimento */
-  border: 1px solid #888; /* Borda */
-  width: 80%; /* Largura relativa */
-  max-width: 500px; /* Largura máxima */
-  border-radius: 8px; /* Cantos arredondados */
+/* Checkbox estilizado */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: normal;
 }
-
-/* Botão de fechar geral (pode ser redundante) */
-.close-button {
-  color: #aaa; /* Cor cinza */
-  float: right; /* Alinha à direita */
-  font-size: 28px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
+input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
 }
-
-/* Efeito hover/focus no botão de fechar geral */
-.close-button:hover,
-.close-button:focus {
-  color: black; /* Escurece a cor */
-  text-decoration: none; /* Remove sublinhado */
-  cursor: pointer; /* Cursor de ponteiro */
+/* Badge de Promoção no Card */
+.produto-card {
+  position: relative; /* Necessário para o badge */
 }
-
-/* Item do carrinho (pode ser redundante com .cart-item acima) */
-.cart-item {
-  display: flex; /* Usa flexbox */
-  justify-content: space-between; /* Espaço entre os elementos */
-  align-items: center; /* Alinha verticalmente */
-  padding: 10px 0; /* Preenchimento */
-  border-bottom: 1px solid #eee; /* Borda inferior */
+.promo-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #27ae60;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 10;
 }
-
-/* Permite que o nome do item ocupe o espaço restante (pode ser redundante) */
-.cart-item span:first-child {
-  flex-grow: 1;
-}
-
-/* Botão de remover item do carrinho (pode ser redundante) */
-.remove-item-btn {
-  background-color: #ff6b6b; /* Cor vermelha */
-  color: white; /* Texto branco */
-  border: none; /* Sem borda */
-  border-radius: 50%; /* Redondo */
-  width: 24px;
-  height: 24px; /* Dimensões fixas */
-  font-size: 16px; /* Tamanho da fonte */
-  font-weight: bold; /* Negrito */
-  cursor: pointer; /* Cursor de ponteiro */
-  margin-left: 15px; /* Margem esquerda */
-  line-height: 24px; /* Centraliza o "X" */
-  transition: background-color 0.2s; /* Transição suave */
-}
-
-/* Efeito hover no botão de remover item (pode ser redundante) */
-.remove-item-btn:hover {
-  background-color: #e04848; /* Escurece a cor */
-}
-
-/* Total do carrinho (pode ser redundante) */
-.cart-total {
-  text-align: right; /* Alinha à direita */
-  font-size: 1.2rem; /* Tamanho da fonte */
-  margin-top: 20px; /* Margem superior */
+/* Preço antigo riscado */
+.preco-antigo {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  display: block; /* Para ficar em cima do preço novo */
 }

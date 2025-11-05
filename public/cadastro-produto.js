@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const nome = document.getElementById('nome').value;
     const descricao = document.getElementById('descricao').value;
-    // Precisamos converter o preço de texto para número
     const preco = parseFloat(document.getElementById('preco').value);
     const categoria = document.getElementById('categoria').value;
 
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(response => {
       if (!response.ok) {
-        // Se o servidor retornar um erro, tentamos extrair a mensagem
         return response.json().then(err => { throw new Error(err.erro || 'Erro no servidor') });
       }
       return response.json();
