@@ -92,3 +92,17 @@ npm run build
 ```bash
 npm run start
 ```
+
+
+
+
+
+
+hostname
+docker run -d `
+--name sistema-pizzaria `
+-e POSTGRES_USER=Pizzaria `
+-e POSTGRES_PASSWORD=Pizzaria@2025 `
+-e POSTGRES_DB=db_pizzaria `
+-p 5432:5432 `
+postgres:latest 
