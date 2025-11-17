@@ -1,6 +1,6 @@
 // src/services/ClienteService.ts
 
-import pool from '../database/config/database'; 
+import pool from '../database/database'; 
 import { Cliente } from '../models/Cliente';
 
 export class ClienteService {

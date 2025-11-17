@@ -1,7 +1,7 @@
 
 // src/services/RelatorioService.ts
 
-import pool from '../database/config/database';
+import pool from '../database/database';
 
 export class RelatorioService {
   

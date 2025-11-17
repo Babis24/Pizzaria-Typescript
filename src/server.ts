@@ -2,46 +2,49 @@
 
 import express from 'express';
 import cors from 'cors';
-import path from 'path'; // path já deve estar importado
+import path from 'path';
 import apiRoutes from './routes/api';
-import pool from './database/config/database';
+
+// Import NOMEADO com chaves {} - Esta é a correção principal!
+import { pool } from './database/database';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Rota virtual para as imagens (isso pode continuar)
-app.use('/uploads', express.static(path.resolve(__dirname, '..', 'public', 'uploads')));
-
-
-// --- CONFIGURAÇÃO PRINCIPAL DO FRONTEND ---
-// Esta linha diz ao Express: "Sirva os arquivos da pasta 'public' como se fossem a raiz do site"
-// O path.resolve garante que o caminho até a pasta 'public' seja encontrado corretamente.
-app.use(express.static(path.resolve(__dirname, '..', 'public')));
-
-
-// --- ROTAS DA API ---
-// Suas rotas da API continuam funcionando normalmente, com o prefixo /api
-app.use('/api', apiRoutes);
-
-
-// ... (resto do seu arquivo com a função startServer)
+// Função assíncrona para iniciar o servidor
 async function startServer() {
   try {
+    // 1. Tenta conectar ao banco de dados primeiro
     const client = await pool.connect();
     console.log('✅ Base de dados conectada com sucesso!');
-    client.release();
+    client.release(); // Libera o cliente de volta para o pool
 
+    // 2. Se a conexão for bem-sucedida, configura e inicia o servidor Express
+    app.use(cors());
+    app.use(express.json());
+
+    // Configura o Express para servir os arquivos estáticos da pasta 'public'
+    app.use(express.static(path.join(__dirname, '../public')));
+
+    // Rota para a página inicial, que deve ser a de login
+    app.get('/', (req, res) => {
+      res.sendFile(path.join(__dirname, '../public/login.html'));
+    });
+    
+    // Configura as rotas da API, prefixadas com /api
+    app.use('/api', apiRoutes);
+
+    // Inicia o servidor na porta especificada
     app.listen(PORT, () => {
       console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
     });
+
   } catch (error) {
+    // Se a conexão com o banco falhar, o servidor não inicia
     console.error('❌ Falha ao conectar com o banco de dados:', error);
-    process.exit(1);
+    process.exit(1); // Encerra o processo com um código de erro
   }
 }
 
+// Chama a função para iniciar tudo
 startServer();

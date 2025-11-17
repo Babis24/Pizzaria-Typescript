@@ -2,40 +2,53 @@
 
 import { Request, Response } from 'express';
 import { PedidoService } from '../services/PedidoService';
+import { pool } from '../database/database'; // Importamos o pool para as novas funções
 
-export class PedidoController {
+const pedidoService = new PedidoService();
 
-  // ====================================================================
-  // ESTA É A FUNÇÃO QUE ESTAVA FALTANDO E CAUSANDO O ERRO
-  static async listar(req: Request, res: Response) {
+// ROTA PROTEGIDA: Apenas para usuários logados
+export const createPedido = async (req: Request, res: Response) => {
     try {
-      // NOTA: A lógica para listar pedidos no service ainda precisa ser feita.
-      // Esta função é um placeholder para corrigir o erro e permitir que o servidor inicie.
-      // const pedidos = await PedidoService.listar();
-      // return res.json(pedidos);
-      return res.status(501).json({ message: 'Função de listar pedidos ainda não implementada.' });
-    } catch (error) {
-       console.error("Erro no controller ao listar pedidos:", error);
-       return res.status(500).json({ erro: "Ocorreu um erro ao buscar os pedidos." });
-    }
-  }
-  // ====================================================================
-
-  static async criar(req: Request, res: Response) {
-    try {
-      const { clienteId, formaPagamento, itens } = req.body;
-
-      if (!clienteId || !formaPagamento || !itens) {
-        return res.status(400).json({ erro: 'Dados do pedido incompletos' });
-      }
-
-      const pedidoCriado = await PedidoService.criar(clienteId, itens, formaPagamento);
-      
-      return res.status(201).json(pedidoCriado);
-
+        const clienteId = req.usuario?.id;
+        if (!clienteId) {
+            return res.status(401).json({ erro: "Cliente não autenticado." });
+        }
+        
+        const { formaPagamento, itens } = req.body;
+        const pedidoData = { clienteId, formaPagamento, itens };
+        const novoPedido = await pedidoService.create(pedidoData);
+        
+        res.status(201).json(novoPedido);
     } catch (error: any) {
-      console.error("Erro no controller ao criar pedido:", error);
-      return res.status(400).json({ erro: error.message });
+        res.status(400).json({ erro: error.message });
     }
-  }
-}
+};
+
+// ROTA DE ADMIN: Para listar todos os pedidos
+export const getAllPedidos = async (req: Request, res: Response) => {
+    try {
+        const result = await pool.query(`
+            SELECT p.id, p.data_pedido, p.total, p.status_pedido, c.nome as cliente_nome 
+            FROM pedidos p 
+            JOIN clientes c ON p.cliente_id = c.id 
+            ORDER BY p.data_pedido DESC
+        `);
+        res.status(200).json(result.rows);
+    } catch (error) {
+        res.status(500).json({ erro: 'Falha ao buscar pedidos.' });
+    }
+};
+
+// ROTA DE ADMIN: Para deletar um pedido específico
+export const deletePedido = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const result = await pool.query('DELETE FROM pedidos WHERE id = $1', [id]);
+        if (result.rowCount === 0) {
+            return res.status(404).json({ erro: 'Pedido não encontrado.' });
+        }
+        res.status(200).json({ mensagem: 'Pedido excluído com sucesso.' });
+    } catch (error) {
+        res.status(500).json({ erro: 'Falha ao excluir pedido.' });
+    }
+};

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Painel Administrativo - Relatórios</title>
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
   <style>
     /* Seus estilos originais, com as cores neutras mantidas */
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -47,23 +47,30 @@
   <header>
     <h1>📊 Painel Administrativo 📊</h1>
     <nav class="main-nav" style="margin-top: 1rem;">
-      <a href="/" class="nav-link">Voltar para o Cardápio</a>
-      <a href="/gerenciar-cliente.html" class="nav-link">Gerenciar Clientes</a>
+     <a id="logout-btn" href="#" class="nav-link">Sair</a>
+      <a href="/gerenciar-produtos.html" class="nav-link">Gerenciar Produtos</a> 
+      <a href="/gerenciar-clientes.html" class="nav-link">Gerenciar Clientes</a>
+      <a href="/gerenciar-pedidos.html" class="nav-link">Gerenciar Pedidos</a> 
     </nav>
   </header>
 
   <main class="admin-container">
-    <!-- Card para os filtros de data -->
-    <div class="report-card">
-      <h2>Filtrar por Período</h2>
-      <div class="filters-card">
-        <label for="dataInicio">De:</label>
-        <input type="date" id="dataInicio">
-        <label for="dataFim">Até:</label>
-        <input type="date" id="dataFim">
-        <button id="btnGerarRelatorio">Gerar Relatório</button>
-      </div>
-    </div>
+    <!-- public/admin.html -->
+<div class="report-card">
+  <h2>Filtrar</h2>
+  <div class="filters-card">
+    <label for="dataInicio">De:</label>
+    <input type="date" id="dataInicio">
+    <label for="dataFim">Até:</label>
+    <input type="date" id="dataFim">
+    <button id="btnGerarRelatorio">Gerar Relatório</button>
+  </div>
+  <div class="filters-presets" style="margin-top: 1rem; display:flex; gap: 0.5rem;">
+      <button class="btn-preset" data-range="this-month">Este Mês</button>
+      <button class="btn-preset" data-range="last-month">Mês Passado</button>
+      <button class="btn-preset" data-range="this-year">Este Ano</button>
+  </div>
+</div>
 
     <!-- Indicador de carregamento -->
     <div id="loading-admin">Carregando relatórios...</div>

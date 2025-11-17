@@ -1,80 +1,93 @@
 // src/services/PedidoService.ts
 
-import pool from '../database/config/database';
-import { ClienteService } from './ClienteService';
-import { ProdutoService } from './ProdutoService';
+import { pool } from '../database/database';
 
-// Interface para os itens que vêm da requisição do frontend
-interface ItemCarrinho {
-  produtoId: number;
-  quantidade: number;
+interface PedidoItem {
+    produtoId: number;
+    quantidade: number;
+}
+
+interface PedidoData {
+    clienteId: number;
+    formaPagamento: string;
+    itens: PedidoItem[];
 }
 
 export class PedidoService {
-  
-  static async criar(clienteId: number, itensCarrinho: ItemCarrinho[], formaPagamento: string): Promise<any> {
-    // 1. Validações iniciais: Buscamos o cliente e os produtos no banco.
-    //    Isso só funciona porque agora ClienteService e ProdutoService são 'async'.
-    const cliente = await ClienteService.buscarPorId(clienteId);
-    if (!cliente) {
-      throw new Error(`Cliente com ID ${clienteId} não encontrado.`);
+
+    // Este é o método que estava faltando!
+    async create(pedidoData: PedidoData) {
+        const { clienteId, formaPagamento, itens } = pedidoData;
+
+        if (!itens || itens.length === 0) {
+            throw new Error('O pedido deve conter pelo menos um item.');
+        }
+
+        const client = await pool.connect();
+
+        try {
+            // Inicia a transação
+            await client.query('BEGIN');
+
+            // 1. Insere o pedido na tabela 'pedidos' e pega o ID gerado
+            const pedidoQuery = `
+                INSERT INTO pedidos (cliente_id, forma_pagamento, total) 
+                VALUES ($1, $2, 0) RETURNING id
+            `;
+            const pedidoResult = await client.query(pedidoQuery, [clienteId, formaPagamento]);
+            const pedidoId = pedidoResult.rows[0].id;
+
+            // 2. Prepara para inserir os itens e calcular o total
+            const productIds = itens.map(item => item.produtoId);
+            let totalPedido = 0;
+
+            // Busca os preços de todos os produtos de uma só vez para eficiência
+            const precosResult = await client.query(
+                'SELECT id, preco, preco_promocional, em_promocao FROM produtos WHERE id = ANY($1::int[])',
+                [productIds]
+            );
+            
+            // Mapeia os preços por ID para fácil acesso
+            const precosMap = new Map<number, number>();
+            precosResult.rows.forEach(p => {
+                const precoFinal = p.em_promocao && p.preco_promocional ? p.preco_promocional : p.preco;
+                precosMap.set(p.id, parseFloat(precoFinal));
+            });
+            
+            // 3. Insere cada item na tabela 'pedido_itens'
+            for (const item of itens) {
+                const precoUnitario = precosMap.get(item.produtoId);
+
+                if (!precoUnitario) {
+                    throw new Error(`Produto com ID ${item.produtoId} não encontrado ou sem preço.`);
+                }
+                
+                totalPedido += precoUnitario * item.quantidade;
+
+                const itemQuery = `
+                    INSERT INTO pedido_itens (pedido_id, produto_id, quantidade, preco_unitario) 
+                    VALUES ($1, $2, $3, $4)
+                `;
+                await client.query(itemQuery, [pedidoId, item.produtoId, item.quantidade, precoUnitario]);
+            }
+
+            // 4. Atualiza o pedido na tabela 'pedidos' com o total final calculado
+            await client.query('UPDATE pedidos SET total = $1 WHERE id = $2', [totalPedido, pedidoId]);
+
+            // Finaliza a transação com sucesso
+            await client.query('COMMIT');
+
+            return { id: pedidoId, total: totalPedido, ...pedidoData };
+
+        } catch (error) {
+            // Se qualquer etapa falhar, desfaz todas as operações
+            await client.query('ROLLBACK');
+            console.error("Erro no serviço ao criar pedido:", error);
+            throw new Error('Não foi possível processar o seu pedido. Tente novamente.');
+        } finally {
+            // Libera o cliente de volta para o pool de conexões
+            client.release();
+        }
     }
 
-    if (!itensCarrinho || itensCarrinho.length === 0) {
-        throw new Error("O pedido deve ter pelo menos um item.");
-    }
-
-    let totalPedido = 0;
-    const itensVerificados = [];
-
-    for (const item of itensCarrinho) {
-      const produto = await ProdutoService.buscarPorId(item.produtoId);
-      if (!produto) {
-        throw new Error(`Produto com ID ${item.produtoId} não encontrado.`);
-      }
-      // O preço vem do banco de dados, não do frontend, por segurança.
-      totalPedido += produto.preco * item.quantidade;
-      itensVerificados.push({ ...produto, quantidade: item.quantidade });
-    }
-    
-    // 2. Conecta ao banco para iniciar a transação
-    const client = await pool.connect();
-    
-    try {
-      // Começa a transação. A partir daqui, ou tudo funciona, ou tudo é desfeito.
-      await client.query('BEGIN');
-
-      // 3. Insere o registro principal na tabela 'pedidos'
-      const sqlPedido = 'INSERT INTO pedidos (cliente_id, total, forma_pagamento, data_pedido) VALUES ($1, $2, $3, NOW()) RETURNING id';
-      const valuesPedido = [clienteId, totalPedido, formaPagamento];
-      const resPedido = await client.query(sqlPedido, valuesPedido);
-      const novoPedidoId = resPedido.rows[0].id;
-
-      // 4. Itera sobre os itens do pedido e insere cada um na tabela 'pedido_itens'
-      for (const item of itensVerificados) {
-        const sqlItem = 'INSERT INTO pedido_itens (pedido_id, produto_id, quantidade, preco_unitario) VALUES ($1, $2, $3, $4)';
-        const valuesItem = [novoPedidoId, item.id, item.quantidade, item.preco];
-        await client.query(sqlItem, valuesItem);
-      }
-      
-      // 5. Se todos os comandos acima funcionaram, confirma a transação
-      await client.query('COMMIT');
-      
-      // 6. Retorna um objeto com os detalhes do pedido criado para o controller
-      return { id: novoPedidoId, total: totalPedido, cliente, itens: itensVerificados };
-
-    } catch (error) {
-      // 7. Se qualquer um dos comandos falhou, desfaz todas as operações
-      await client.query('ROLLBACK');
-      console.error('Erro na transação do pedido, rollback executado:', error);
-      // Lança o erro para o controller poder capturá-lo
-      throw new Error('Não foi possível criar o pedido devido a um erro no banco de dados.');
-    } finally {
-      // 8. Independentemente de sucesso ou falha, libera a conexão de volta para o pool
-      client.release();
-    }
-  }
-
-  // A função de listar pedidos também precisaria ser refatorada com SQL
-  // static async listar(): Promise<any[]> { ... }
 }

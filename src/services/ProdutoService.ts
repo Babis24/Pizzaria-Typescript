@@ -1,6 +1,6 @@
 // src/services/ProdutoService.ts
 
-import pool from '../database/config/database';
+import pool from '../database/database';
 
 interface Produto {
   id: number;
