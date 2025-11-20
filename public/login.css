@@ -1,41 +1,50 @@
-/* public/login.css */
-
 :root {
-  --primary-color: #ff4500;
-  --background-color: #f4f4f4;
+  --primary-color: #cf4d0c; /* Fundo laranja */
   --card-background: #ffffff;
   --text-color: #333;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --input-background: #f8f9fa;
   --border-color: #dee2e6;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
-  background-color: var(--background-color);
+  
+  /* --- ALTERAÇÃO DO DEGRADÊ AQUI --- */
+  /* De um Laranja bem escuro (#992e00) para um Laranja vibrante (#ff7300) */
+  background: linear-gradient(135deg, #992e00, #ff7300);
+  
+  /* Garante que o degradê fique fixo mesmo se houver rolagem */
+  background-attachment: fixed; 
+  background-size: cover;
+  
   color: var(--text-color);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
+/* --- Cabeçalho Transparente --- */
 .login-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 3rem;
-  background-color: var(--primary-color);
-  box-shadow: 0 2px 4px var(--shadow-color);
+  background-color: transparent;
+  box-shadow: none;
   width: 100%;
   box-sizing: border-box;
+  color: white;
+  position: relative;
+  z-index: 10;
 }
 
 .login-header .logo {
-  height: 60px;
-  width: 60px;
+  height: 100px;
+  width: 100px;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .login-header .main-nav a {
@@ -43,28 +52,105 @@ body {
   text-decoration: none;
   font-weight: bold;
   margin-left: 1.5rem;
+  text-transform: uppercase;
+  font-size: 0.9rem;
   transition: opacity 0.2s;
 }
 .login-header .main-nav a:hover {
   opacity: 0.8;
+  text-decoration: underline;
 }
 
+/* --- Container Principal --- */
 .login-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1; /* Faz o container principal ocupar o espaço restante */
-  padding: 2rem;
+  flex-direction: column; /* Um em cima do outro */
+  align-items: center;      /* Centraliza horizontalmente */
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* --- A MUDANÇA ESTÁ AQUI --- */
+  
+  /* 1. Desliga o alinhamento central automático vertical */
+  justify-content: flex-start; 
+  
+  /* 2. Define manualmente a distância do topo (Header) */
+  /* Quanto MENOR este número, mais para CIMA ele vai. */
+  /* Tente 2rem, 4rem ou 6rem. */
+  padding-top: 1%;; 
+  
+  padding-bottom: 5%; 
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
+/* Ajuste para telas de celular (para não subir demais e cortar) */
+@media (max-width: 768px) {
+  .login-container {
+  display: flex;
+  flex-direction: column; /* Um em cima do outro */
+  align-items: center;    /* Centraliza horizontalmente (esquerda/direita) */
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* --- O SEGREDO ESTÁ AQUI --- */
+  
+  /* 1. Mude de 'center' para 'flex-start'. 
+     Isso joga tudo lá pra cima, colado no header. */
+  justify-content: flex-start; 
+  
+  /* 2. Use o padding-top para empurrar um pouco para baixo.
+     Se quiser MAIS ALTO, diminua este número (ex: 1rem).
+     Se quiser MAIS BAIXO, aumente este número (ex: 8rem). */
+  padding-top: 2rem; 
+  
+  /* Mantemos um respiro nas laterais e embaixo */
+  padding-bottom: 1rem; 
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+}
+
+/* --- Título de Bem-Vindo --- */
+.welcome-title {
+  color: white;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  animation: popupFadeIn 0.6s ease-out forwards;
+}
+
+/* --- Cartão de Login (Pop-up) --- */
 .login-card {
   background: var(--card-background);
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 3rem;
+  border-radius: 20px;
+  
+  /* Sombra e efeito flutuante */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+  
   width: 100%;
   max-width: 400px;
   text-align: center;
+  position: relative;
+  
+  /* Animação */
+  animation: popupFadeIn 0.6s ease-out forwards;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .login-card h2 {
@@ -74,31 +160,36 @@ body {
   font-size: 1.8rem;
 }
 
+/* --- Formulário --- */
 .form-group {
   margin-bottom: 1.5rem;
   text-align: left;
 }
 .form-group label {
-  display: block;
+  display: blbuttonock;
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-weight: 600;
+  color: #555;
 }
 .form-group input {
   width: 100%;
-  padding: 0.8rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
   box-sizing: border-box;
-  background-color: var(--input-background);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  background-color: #f8f9fa;
+  font-size: 1rem;
+  transition: border-color 0.3s, background-color 0.3s;
 }
 .form-group input:focus {
   outline: none;
+  background-color: #fff;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 69, 0, 0.2);
+  box-shadow: 0 0 0 4px rgba(227, 79, 5, 0.2);
 }
 
-button[type="submit"] {
+/* --- Botão Principal --- */
+[type="submit"] {
   width: 100%;
   padding: 1rem;
   font-size: 1.1rem;
@@ -106,45 +197,71 @@ button[type="submit"] {
   background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
 }
 
-button[type="submit"]:hover {
-  background-color: #e63e00;
+button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  
+  /* --- DEGRADÊ NO BOTÃO --- */
+  /* Vai da esquerda (laranja mais escuro) para a direita (laranja claro) */
+  background-image: linear-gradient(to right, #d64100, #ff9100);
+  background-size: 200% auto; /* Prepara o efeito de hover */
+  transition: 0.4s; /* Transição suave */
 }
-
+/* --- Links de Alternar --- */
 .toggle-view {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #666;
 }
 .toggle-view a {
   color: var(--primary-color);
   font-weight: bold;
   text-decoration: none;
 }
+.toggle-view a:hover {
+  text-decoration: underline;
+  color: #a83800;
+}
 
+/* --- Mensagens de Status --- */
 .status-message {
   margin-top: 1rem;
-  padding: 1rem;
-  border-radius: 5px;
-  text-align: center;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 .success { background-color: #d1e7dd; color: #0f5132; }
-.error { background-color: #f8d7da; color: #842029; }
+.error { background-color: #ffebe9; color: #c92a2a; }
 
-
+/* --- Rodapé Transparente --- */
 .contato-footer {
   text-align: center;
-  padding: 2rem;
-  background-color: #2c2c2c;
-  color: #f4f4f4;
-  width: 100%;
-  box-sizing: border-box;
+  padding: 1rem;
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  /* Garante que o rodapé não atrapalhe o layout flex */
+  flex-shrink: 0; 
 }
 .contato-footer h3 {
-    margin-top: 0;
-    color: var(--primary-color);
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.contato-footer p {
+    margin: 0;
 }

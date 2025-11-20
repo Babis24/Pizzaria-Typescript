@@ -17,15 +17,11 @@
       <div class="logo-container">
         <img src="gatinho.jpg" alt="Logo da Pizzaria" class="logo">
       </div>
-      <h1>🍕 Nosso Cardápio 🍕</h1>
+      <h1>Nosso Cardápio</h1>
     </div>
     <nav class="main-nav">
       <a href="#" id="logout-btn" class="nav-link">Sair</a>
     </nav>
-    <div id="cart-icon" class="cart-icon">
-      🛒
-      <span id="cart-count" class="cart-count">0</span>
-    </div>
 </header>
 
 <div class="page-container">
@@ -46,7 +42,7 @@
   <main id="menu-container">
       <div id="loading">Carregando cardápio...</div>
       <div class="products-section" style="display: none;">
-        <h2 id="section-title">Todos os Produtos</h2>
+        <h2 id="section-title">Todos os produtos</h2>
         <div id="products-grid-container" class="products-grid">
           <!-- Produtos serão inseridos aqui pelo JavaScript -->
         </div>
@@ -92,6 +88,11 @@
     </div>
     <button id="print-receipt-btn">Imprimir</button>
   </div>
+</div>
+
+<div id="cart-icon" class="cart-icon">
+  <i class="fas fa-shopping-cart"></i> <!-- Adicionei um ícone aqui caso o emoji sumiu -->
+  <span id="cart-count" class="cart-count">0</span>
 </div>
 
 <script src="script.js"></script>
