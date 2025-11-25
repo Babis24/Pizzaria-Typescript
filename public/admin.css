@@ -2,7 +2,7 @@
   --primary-color: #e34f05;
   --primary-dark: #992e00;
   --primary-light: #ff7300;
-  --background-color: #fdfbf7; /* Fundo creme suave igual ao do site */
+  --background-color: #fdfbf7; 
   --card-background: #ffffff;
   --text-color: #333;
   --border-color: #e0e0e0;
@@ -19,22 +19,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* --- Cabeçalho Admin (Igual ao do Cardápio) --- */
+/* --- Cabeçalho Admin --- */
 header {
   background: var(--gradient-primary);
   color: white;
   padding: 1rem 2rem;
-  
-  /* Fixado no topo */
   position: sticky;
   top: 0;
   z-index: 100;
-  
-  /* Cantos inferiores arredondados */
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   box-shadow: 0 4px 20px rgba(227, 79, 5, 0.25);
-  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,7 +48,6 @@ header h1 {
   align-items: center;
   gap: 10px;
 }
-/* Detalhe embaixo do título */
 header h1::after {
   content: '';
   display: block;
@@ -63,7 +57,6 @@ header h1::after {
   border-radius: 2px;
 }
 
-/* Navegação do Admin */
 header nav {
   display: flex;
   gap: 0.5rem;
@@ -71,14 +64,14 @@ header nav {
 }
 
 header nav a {
-  color: white; /* Texto padrão */
+  color: white; 
   text-decoration: none;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 10px 20px;
-  border-radius: 30px; /* Pílula */
+  border-radius: 30px; 
   transition: all 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.15); /* Fundo sutil */
+  background-color: rgba(255, 255, 255, 0.15); 
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -89,7 +82,6 @@ header nav a:hover {
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Link de Sair (destaque) */
 #logout-btn {
   background-color: rgba(0, 0, 0, 0.2);
   border-color: transparent;
@@ -101,7 +93,7 @@ header nav a:hover {
 
 /* --- Container Principal --- */
 .admin-container {
-  max-width: 95%; /* Largo para caber tabelas */
+  max-width: 95%; 
   margin: 2rem auto;
   padding: 0 1rem;
   animation: fadeIn 0.5s ease-out;
@@ -112,7 +104,7 @@ header nav a:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Cards (Fundo Branco) --- */
+/* --- Cards --- */
 .admin-card, .report-card {
   background: var(--card-background);
   padding: 2rem;
@@ -129,12 +121,12 @@ header nav a:hover {
   margin-bottom: 1.5rem;
   gap: 1rem;
   flex-wrap: wrap;
-  background: #f8f9fa; /* Fundo cinza claro para a barra de ação */
+  background: #f8f9fa; 
   padding: 1rem;
   border-radius: 15px;
 }
 
-/* --- Inputs e Buscas (Pílulas) --- */
+/* --- Inputs e Buscas --- */
 input[type="text"], 
 input[type="search"],
 input[type="date"],
@@ -158,14 +150,14 @@ input:focus, select:focus {
 /* --- Tabelas Modernas --- */
 .data-table, .report-table {
   width: 100%;
-  border-collapse: separate; /* Permite arredondar bordas */
+  border-collapse: separate; 
   border-spacing: 0;
   margin-top: 1rem;
-  overflow: hidden; /* Corta os cantos da tabela */
+  overflow: hidden; 
 }
 
 .data-table th, .report-table th {
-  background-color: #fff0e6; /* Laranja bem clarinho */
+  background-color: #fff0e6; 
   color: var(--primary-color);
   text-align: left;
   padding: 1.2rem;
@@ -183,15 +175,14 @@ input:focus, select:focus {
   vertical-align: middle;
 }
 
-/* Hover na linha da tabela */
 .data-table tbody tr:hover, .report-table tbody tr:hover {
   background-color: #fafafa;
-  transform: scale(1.002); /* Efeito muito sutil */
+  transform: scale(1.002); 
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: 0.2s;
 }
 
-/* --- Botões Padrão (Gradient) --- */
+/* --- Botões Padrão --- */
 .btn-primary, #btnGerarRelatorio {
   background: var(--gradient-primary);
   color: white;
@@ -210,7 +201,6 @@ input:focus, select:focus {
   box-shadow: 0 6px 15px rgba(227, 79, 5, 0.4);
 }
 
-/* Botões de Ação na Tabela */
 .btn-edit, .btn-delete, .delete-client-btn {
   border: none;
   padding: 8px 16px;
@@ -222,19 +212,12 @@ input:focus, select:focus {
   margin-right: 5px;
 }
 
-.btn-edit {
-  background-color: #e3f2fd;
-  color: #1976d2;
-}
+.btn-edit { background-color: #e3f2fd; color: #1976d2; }
 .btn-edit:hover { background-color: #1976d2; color: white; }
 
-.btn-delete, .delete-client-btn {
-  background-color: #ffebee;
-  color: #c62828;
-}
+.btn-delete, .delete-client-btn { background-color: #ffebee; color: #c62828; }
 .btn-delete:hover, .delete-client-btn:hover { background-color: #c62828; color: white; }
 
-/* Botões de Filtro de Relatório */
 .btn-preset {
   background: white;
   border: 1px solid #ddd;
@@ -250,7 +233,7 @@ input:focus, select:focus {
   color: var(--primary-color);
 }
 
-/* --- Estilos do Modal (Padronizado) --- */
+/* --- ESTILOS DO MODAL (CORRIGIDO) --- */
 .modal {
   display: none;
   position: fixed;
@@ -262,6 +245,7 @@ input:focus, select:focus {
   align-items: center;
   backdrop-filter: blur(5px);
 }
+
 .modal-content {
   background-color: #fff;
   padding: 2.5rem;
@@ -271,7 +255,28 @@ input:focus, select:focus {
   position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,0.2);
   animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* --- A CORREÇÃO MÁGICA --- */
+  max-height: 90vh; /* Altura máxima de 90% da tela */
+  overflow-y: auto; /* Cria barra de rolagem se passar disso */
 }
+
+/* Barra de rolagem estilizada dentro do modal */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+    background: #ccc; 
+    border-radius: 4px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light); 
+}
+
 
 @keyframes modalPop {
   from { transform: scale(0.8); opacity: 0; }
@@ -285,13 +290,13 @@ input:focus, select:focus {
   font-size: 2rem;
   cursor: pointer;
   transition: color 0.2s;
+  z-index: 10;
 }
 .close-button:hover { color: var(--primary-color); }
 
-/* Grupos de Formulário no Modal */
 .form-group { margin-bottom: 1.2rem; }
 .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #444; margin-left: 10px;}
-.form-group input, .form-group select { width: 100%; box-sizing: border-box; } /* Ajuste de largura */
+.form-group input, .form-group select { width: 100%; box-sizing: border-box; }
 .form-group-checkbox {
   display: flex; 
   align-items: center; 
@@ -300,12 +305,9 @@ input:focus, select:focus {
   padding: 10px 15px;
   border-radius: 15px;
 }
-.form-group-checkbox input { width: auto; } /* Checkbox pequeno */
+.form-group-checkbox input { width: auto; }
 
-/* Preço Promocional na Tabela */
-.promo-price { color: #27ae60; font-weight: bold; }
-
-/* Grid de Resumo (Dashboard) */
+/* Grid de Resumo e Gráficos */
 .summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -324,7 +326,6 @@ input:focus, select:focus {
 .summary-item h3 { margin: 0; color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 .summary-item p { margin: 0.5rem 0 0; font-size: 2rem; font-weight: 800; color: var(--primary-color); }
 
-/* Gráficos */
 .graficos-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
