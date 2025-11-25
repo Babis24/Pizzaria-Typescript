@@ -1,96 +1,340 @@
-/* public/admin.css */
 :root {
-  --primary-color: #ff4500;
-  --background-color: #f4f4f4;
+  --primary-color: #e34f05;
+  --primary-dark: #992e00;
+  --primary-light: #ff7300;
+  --background-color: #fdfbf7; /* Fundo creme suave igual ao do site */
   --card-background: #ffffff;
   --text-color: #333;
-  --shadow-color: rgba(0,0,0,0.1);
-  --border-color: #dee2e6;
+  --border-color: #e0e0e0;
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #d64100, #ff9100);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* --- Cabeçalho Admin (Igual ao do Cardápio) --- */
 header {
-  background-color: var(--primary-color);
+  background: var(--gradient-primary);
   color: white;
-  padding: 1.2rem 2rem;
-  box-shadow: 0 2px 4px var(--shadow-color);
+  padding: 1rem 2rem;
+  
+  /* Fixado no topo */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  /* Cantos inferiores arredondados */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 20px rgba(227, 79, 5, 0.25);
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-header h1 { margin: 0; font-size: 1.8rem; }
-header nav a { color: white; text-decoration: none; font-weight: bold; margin: 0 1rem; }
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Detalhe embaixo do título */
+header h1::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 2px;
+}
 
+/* Navegação do Admin */
+header nav {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+header nav a {
+  color: white; /* Texto padrão */
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 30px; /* Pílula */
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.15); /* Fundo sutil */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header nav a:hover {
+  background-color: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Link de Sair (destaque) */
+#logout-btn {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-color: transparent;
+}
+#logout-btn:hover {
+  background-color: #333;
+  color: white;
+}
+
+/* --- Container Principal --- */
 .admin-container {
-  max-width: 1200px;
+  max-width: 95%; /* Largo para caber tabelas */
   margin: 2rem auto;
   padding: 0 1rem;
+  animation: fadeIn 0.5s ease-out;
 }
 
-.admin-card {
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Cards (Fundo Branco) --- */
+.admin-card, .report-card {
   background: var(--card-background);
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 6px 12px var(--shadow-color);
+  border-radius: 20px;
+  box-shadow: var(--shadow-light);
+  margin-bottom: 2rem;
+  border: 1px solid #f0f0f0;
 }
 
-.actions-bar {
+.actions-bar, .filters-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
-}
-
-#search-product-input, #search-client-input {
-  padding: 0.8rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  width: 300px;
-}
-
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.data-table th, .data-table td {
-  text-align: left;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: #f8f9fa; /* Fundo cinza claro para a barra de ação */
   padding: 1rem;
-  border-bottom: 1px solid #f0f0f0;
+  border-radius: 15px;
 }
 
-.data-table th { background-color: #f8f9fa; font-weight: 600; }
-.data-table tbody tr:hover { background-color: #f8f9fa; }
+/* --- Inputs e Buscas (Pílulas) --- */
+input[type="text"], 
+input[type="search"],
+input[type="date"],
+input[type="number"],
+select {
+  padding: 12px 20px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  background-color: white;
+  outline: none;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  font-family: 'Roboto', sans-serif;
+}
 
-.btn-primary { background-color: var(--primary-color); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-.btn-edit { background-color: #3498db; color: white; border:none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
-.btn-delete, .delete-client-btn { background-color: #e74c3c; color: white; border:none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+input:focus, select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(227, 79, 5, 0.1);
+}
 
-/* ESTILOS DO MODAL - Crucial para a página de produtos */
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); justify-content: center; align-items: center; }
-.modal-content { background-color: #fefefe; margin: auto; padding: 2rem; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 12px; position: relative; }
-.close-button { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
-.form-group { margin-bottom: 1rem; }
-.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-.form-group input, .form-group select { width: 100%; padding: 0.8rem; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-.form-group-checkbox { display: flex; align-items: center; gap: 0.5rem; }
-.promo-price { color: #27ae60; font-weight: bold; }
+/* --- Tabelas Modernas --- */
+.data-table, .report-table {
+  width: 100%;
+  border-collapse: separate; /* Permite arredondar bordas */
+  border-spacing: 0;
+  margin-top: 1rem;
+  overflow: hidden; /* Corta os cantos da tabela */
+}
 
-/* public/admin.css (no final do arquivo) */
-.btn-preset {
-  background-color: #f2f2f2;
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  border-radius: 5px;
+.data-table th, .report-table th {
+  background-color: #fff0e6; /* Laranja bem clarinho */
+  color: var(--primary-color);
+  text-align: left;
+  padding: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  border-bottom: 2px solid #ffe0d1;
+}
+
+.data-table td, .report-table td {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Hover na linha da tabela */
+.data-table tbody tr:hover, .report-table tbody tr:hover {
+  background-color: #fafafa;
+  transform: scale(1.002); /* Efeito muito sutil */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: 0.2s;
+}
+
+/* --- Botões Padrão (Gradient) --- */
+.btn-primary, #btnGerarRelatorio {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(227, 79, 5, 0.3);
+}
+
+.btn-primary:hover, #btnGerarRelatorio:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(227, 79, 5, 0.4);
+}
+
+/* Botões de Ação na Tabela */
+.btn-edit, .btn-delete, .delete-client-btn {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: 0.2s;
+  margin-right: 5px;
+}
+
+.btn-edit {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+.btn-edit:hover { background-color: #1976d2; color: white; }
+
+.btn-delete, .delete-client-btn {
+  background-color: #ffebee;
+  color: #c62828;
+}
+.btn-delete:hover, .delete-client-btn:hover { background-color: #c62828; color: white; }
+
+/* Botões de Filtro de Relatório */
+.btn-preset {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  color: #666;
+  font-weight: 500;
+  transition: 0.2s;
 }
 .btn-preset:hover {
-  background-color: #e0e0e0;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* --- Estilos do Modal (Padronizado) --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px);
+}
+.modal-content {
+  background-color: #fff;
+  padding: 2.5rem;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 24px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-button {
+  position: absolute;
+  top: 15px; right: 20px;
+  color: #aaa;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.close-button:hover { color: var(--primary-color); }
+
+/* Grupos de Formulário no Modal */
+.form-group { margin-bottom: 1.2rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 700; color: #444; margin-left: 10px;}
+.form-group input, .form-group select { width: 100%; box-sizing: border-box; } /* Ajuste de largura */
+.form-group-checkbox {
+  display: flex; 
+  align-items: center; 
+  gap: 0.8rem;
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 15px;
+}
+.form-group-checkbox input { width: auto; } /* Checkbox pequeno */
+
+/* Preço Promocional na Tabela */
+.promo-price { color: #27ae60; font-weight: bold; }
+
+/* Grid de Resumo (Dashboard) */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.summary-item {
+  background: linear-gradient(135deg, #ffffff, #fff8f5);
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: 1px solid #ffe0d1;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.summary-item:hover { transform: translateY(-5px); }
+.summary-item h3 { margin: 0; color: #666; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+.summary-item p { margin: 0.5rem 0 0; font-size: 2rem; font-weight: 800; color: var(--primary-color); }
+
+/* Gráficos */
+.graficos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+  .graficos-grid { grid-template-columns: 1fr; }
+  header { flex-direction: column; text-align: center; }
+  .actions-bar { flex-direction: column; align-items: stretch; }
+  input { width: 100%; }
 }

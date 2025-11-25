@@ -8,7 +8,8 @@
   --card-background: #ffffff;
   --text-color: #333;
   --text-light: #666;
-  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 10px 25px rgba(227, 79, 5, 0.2);
   --gradient-primary: linear-gradient(135deg, #d64100, #ff9100);
 }
 
@@ -18,32 +19,35 @@ body {
   background-color: var(--background-color);
   color: var(--text-color);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* --- Cabeçalho Premium (Fixo e Elegante) --- */
 header {
-  background: linear-gradient(to right, var(--primary-dark), var(--primary-light));
+  background: var(--gradient-primary);
   color: white;
   padding: 0.8rem 0;
   
-  /* Fixa o cabeçalho no topo */
+  /* Sticky Header */
   position: sticky; 
   top: 0;
   z-index: 100;
   
-  /* Arredonda as pontas de baixo */
+  /* Curvas inferiores */
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   
-  box-shadow: 0 4px 20px rgba(227, 79, 5, 0.2);
+  box-shadow: 0 4px 20px rgba(227, 79, 5, 0.25);
   display: flex;
   justify-content: center;
-  backdrop-filter: blur(5px);
+  
+  /* Prepara para o efeito de transparência */
+  transition: all 0.4s ease;
 }
 
 .header-content {
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: space-between; 
   width: 100%;
   max-width: 90%; 
@@ -62,28 +66,45 @@ header {
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  border: 2px solid rgba(255,255,255,0.8);
 }
 
+/* Título Estilo Admin */
 header h1 {
   margin: 0;
   font-family: 'Roboto', sans-serif;
   font-size: 1.5rem;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 2px; /* Espaçamento premium */
+  letter-spacing: 2px;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  white-space: nowrap;
-  transition: opacity 0.1s ease-out; /* Deixa o efeito amanteigado */
+  
+  /* Layout do Título */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
   
   /* Centralização Absoluta */
   position: absolute; 
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  
+  transition: opacity 0.1s ease-out;
 }
 
-/* Navegação (Botão Sair) */
+header h1::after {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 2px;
+}
+
+/* Botão Sair (Branco Pill) */
 .main-nav {
   display: flex;
   align-items: center;
@@ -108,17 +129,18 @@ header h1 {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* --- Carrinho Flutuante (Canto Inferior Direito) --- */
+/* --- Carrinho Flutuante (Branco com Sombra) --- */
 .cart-icon {
-  position: fixed;  /* Isso obriga ele a sair do fluxo e flutuar */
-  bottom: 30px;     /* Cola no fundo */
-  right: 30px;      /* Cola na direita */
-  z-index: 9999;    /* Garante que fique na frente de tudo */
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
   
-  background-color: #ffffff;
-  color: var(--primary-color);
+  background-color: #ffffff;      
+  color: var(--primary-color);    
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); 
   
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   cursor: pointer;
   border-radius: 50%;
   width: 65px;
@@ -127,25 +149,23 @@ header h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cart-icon:hover {
   transform: scale(1.15) translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); 
-  transform: scale(1.1);
 }
 
 .cart-count {
   position: absolute;
-  top: -5px; 
-  right: -5px;
+  top: -2px; 
+  right: -2px;
   background-color: var(--primary-color); 
   color: white; 
+  border: 2px solid white; 
   border-radius: 50%;
-  padding: 5px 5px;
+  padding: 4px 7px;
   min-width: 16px;
   font-size: 0.8rem;
   font-weight: bold;
@@ -162,15 +182,14 @@ header h1 {
   padding: 0 1.5rem;
 }
 
-/* --- Barra Lateral (Sidebar - Fixa na rolagem) --- */
+/* --- Barra Lateral (Sidebar Fixa) --- */
 .sidebar {
   flex: 0 0 260px;
   background: transparent;
   height: fit-content;
   
-  /* Lógica do Sticky Sidebar */
   position: sticky;
-  top: 100px; /* Cola quando o topo chegar a 100px (abaixo do header) */
+  top: 100px; /* Distância do topo */
   align-self: flex-start;
   z-index: 50;
 }
@@ -181,8 +200,12 @@ header h1 {
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid #eee;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
+/* Filtros Estilo Admin (Pílulas Limpas) */
 .filter-container {
   display: flex;
   flex-direction: column;
@@ -191,59 +214,66 @@ header h1 {
 
 .filter-btn {
   text-align: left;
-  border-radius: 30px;
+  border-radius: 30px; /* Formato Pílula */
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 0.8rem 1.2rem;
-  font-size: 1rem;
-  border: 1px solid transparent;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  
+  border: 1px solid #ddd;
   background-color: white;
   color: #555;
+  
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .filter-btn i {
   color: var(--primary-color);
   width: 20px;
   text-align: center;
+  transition: color 0.3s;
 }
 
 .filter-btn:hover {
   transform: translateX(5px);
+  border-color: var(--primary-color);
   color: var(--primary-color);
-  background-color: white;
 }
 
+/* Botão Ativo = Gradient (Igual btn-primary do Admin) */
 .filter-btn.active {
   background: var(--gradient-primary);
   color: white;
-  box-shadow: 0 4px 10px rgba(227, 79, 5, 0.3);
+  border-color: transparent;
+  box-shadow: var(--shadow-hover);
 }
 .filter-btn.active i {
   color: white;
 }
 
-/* Input de Pesquisa na Sidebar */
+/* Input de Pesquisa Estilo Admin */
 .search-container {
   margin-top: 1.5rem;
 }
 #search-input {
   width: 100%;
-  padding: 0.8rem 1.2rem;
+  padding: 12px 20px;
   border: 1px solid #ddd;
   border-radius: 30px;
   box-sizing: border-box;
   outline: none;
+  font-size: 0.95rem;
+  font-family: 'Roboto', sans-serif;
   transition: 0.3s;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 #search-input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(227, 79, 5, 0.1);
+  box-shadow: 0 0 0 4px rgba(227, 79, 5, 0.15); /* Glow Admin */
 }
 
 /* --- Área de Produtos --- */
@@ -254,8 +284,8 @@ header h1 {
   color: var(--text-color);
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  border-left: 5px solid var(--primary-color);
-  padding-left: 1rem;
+  font-weight: 800;
+  padding-left: 0.5rem;
 }
 
 #loading {
@@ -268,15 +298,15 @@ header h1 {
 /* --- Grid de Produtos --- */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 2rem;
 }
 
 /* --- Card do Produto --- */
 .produto-card {
   background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 20px; /* Mais arredondado */
+  box-shadow: var(--shadow-light);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -287,25 +317,24 @@ header h1 {
 
 .produto-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-hover);
   border-color: transparent;
 }
 
-/* Badge de Promoção */
 .promo-badge {
   position: absolute;
   top: 15px;
-  right: 15px; /* Direita */
+  right: 15px; 
   left: auto;
   background-color: #27ae60;
   color: white;
-  padding: 5px 10px;
+  padding: 5px 12px;
   border-radius: 20px;
   font-size: 0.7rem;
-  font-weight: bold;
+  font-weight: 800;
   text-transform: uppercase;
   z-index: 2;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 .produto-card .card-image {
@@ -329,13 +358,13 @@ header h1 {
   font-size: 0.75rem;
   color: #999;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
 }
 
 .produto-card .nome {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
   color: #333;
@@ -354,12 +383,12 @@ header h1 {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.2rem;
-  background-color: #fdfdfd;
+  background-color: #fcfcfc;
   border-top: 1px solid #f0f0f0;
 }
 
 .produto-card .preco {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--primary-color);
   display: flex;
@@ -370,30 +399,31 @@ header h1 {
 .preco .preco-antigo {
   text-decoration: line-through;
   color: #aaa;
-  font-size: 0.85rem;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 500;
   margin-bottom: 3px;
 }
 
+/* Botão de Adicionar (Estilo Admin Arredondado) */
 .add-to-cart-btn {
   background: var(--gradient-primary);
   color: white;
   border: none;
-  border-radius: 12px;
-  width: 42px;
-  height: 42px;
+  border-radius: 14px; /* Mais arredondado para lembrar o tema Pill */
+  width: 44px;
+  height: 44px;
   font-size: 1.1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 3px 8px rgba(227, 79, 5, 0.3);
+  box-shadow: 0 4px 10px rgba(227, 79, 5, 0.3);
 }
 
 .add-to-cart-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 5px 12px rgba(227, 79, 5, 0.5);
+  box-shadow: 0 6px 15px rgba(227, 79, 5, 0.5);
   background: linear-gradient(135deg, #ff5100, #ff9e00); 
 }
 
@@ -401,7 +431,7 @@ header h1 {
   pointer-events: none;
 }
 
-/* --- Modais (Carrinho e Comprovante) --- */
+/* --- Modais (Estilo Limpo) --- */
 .modal {
   display: none;
   position: fixed;
@@ -411,30 +441,30 @@ header h1 {
   z-index: 2000;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
 }
 .modal-content {
   background-color: var(--card-background);
-  padding: 2rem;
-  border-radius: 16px;
+  padding: 2.5rem;
+  border-radius: 24px;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.3);
   width: 90%;
-  max-width: 450px;
+  max-width: 500px;
   max-height: 90vh;
   overflow-y: auto;
-  animation: modalUp 0.4s ease;
+  animation: modalUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes modalUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
 }
 
 .close-button {
   position: absolute;
-  top: 15px; right: 20px;
-  color: #aaa;
+  top: 20px; right: 25px;
+  color: #bbb;
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
@@ -446,17 +476,17 @@ header h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
-  border-bottom: 1px solid #eee;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 .cart-item:last-child { border-bottom: none; }
 
 .remove-item-btn {
-  background-color: #ffebe9;
-  color: #c92a2a;
+  background-color: #ffebee;
+  color: #c62828;
   border: none;
   border-radius: 50%;
-  width: 30px; height: 30px;
+  width: 32px; height: 32px;
   cursor: pointer;
   margin-left: 10px;
   display: flex;
@@ -464,18 +494,19 @@ header h1 {
   justify-content: center;
   transition: 0.2s;
 }
-.remove-item-btn:hover { background-color: #c92a2a; color: white; }
+.remove-item-btn:hover { background-color: #c62828; color: white; }
 
-/* --- Estilização do Select e Checkout --- */
+/* --- Checkout (Modernizado Estilo Admin) --- */
 .checkout-section .form-group label {
   display: block;
   margin-bottom: 0.8rem;
-  font-weight: 600;
-  color: #555;
-  font-size: 1rem;
+  font-weight: 700;
+  color: #444;
+  font-size: 0.95rem;
   margin-left: 10px; 
 }
 
+/* Select de Pagamento Pill */
 #pagamento-select {
   appearance: none;
   -webkit-appearance: none;
@@ -491,8 +522,8 @@ header h1 {
   font-weight: 500;
   
   background-color: #f9f9f9;
-  border: 2px solid #e0e0e0;
-  border-radius: 50px; /* Pílula */
+  border: 1px solid #ddd;
+  border-radius: 30px; 
   
   cursor: pointer;
   transition: all 0.3s ease;
@@ -522,41 +553,51 @@ header h1 {
   padding: 10px;
 }
 
-/* Botões Finais */
+/* Botões Grandes de Ação (Checkout/Imprimir) */
 .checkout-btn, #print-receipt-btn {
   width: 100%;
-  padding: 1rem;
+  padding: 14px;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 700;
   background: var(--gradient-primary);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 30px; /* Pílula Completa */
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   transition: 0.3s;
-  box-shadow: 0 4px 10px rgba(227, 79, 5, 0.3);
+  box-shadow: 0 6px 15px rgba(227, 79, 5, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 .checkout-btn:hover, #print-receipt-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(227, 79, 5, 0.4);
+    box-shadow: 0 10px 25px rgba(227, 79, 5, 0.4);
 }
+.checkout-btn:disabled {
+    background: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .cart-total {
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: 800;
   text-align: right;
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 2px solid #eee;
+  color: var(--primary-color);
 }
 
 /* --- Responsividade --- */
 @media (max-width: 768px) {
   header {
-    padding: 1rem 0;
-    border-radius: 0; /* Remove curvas no mobile */
+    padding: 0.8rem 0;
+    border-radius: 0;
   }
-
+  
   .page-container {
     flex-direction: column;
   }
@@ -564,14 +605,18 @@ header h1 {
   header h1 {
     position: static; 
     transform: none;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     text-align: left;
     letter-spacing: 1px;
     flex-grow: 1;
-    white-space: normal; /* Permite quebrar linha no mobile */
+    white-space: normal;
+    padding-left: 1rem;
+    align-items: flex-start;
   }
+  header h1::after { display: none; } /* Remove linha decorativa no mobile */
 
-  /* No celular, desligamos o menu fixo para não cobrir a tela */
+  /* Menu Sair e Carrinho ajustam automaticamente pois estão flex */
+
   .sidebar {
     width: 100%;
     position: static; 
@@ -581,13 +626,24 @@ header h1 {
     flex-direction: row;
     overflow-x: auto; 
     padding-bottom: 10px;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .filter-container::-webkit-scrollbar {
+    display: none;
+  }
+  
   .filter-btn {
     flex-shrink: 0;
+    font-size: 0.85rem;
+    padding: 10px 16px;
   }
+  
   .header-content {
-    gap: 0.8rem;
+    gap: 0.5rem;
   }
+  
   .cart-icon {
     width: 55px;
     height: 55px;
@@ -595,21 +651,24 @@ header h1 {
     bottom: 20px;
     right: 20px;
   }
+  
+  /* Ajuste no layout dos cards para caber melhor no mobile */
+  .products-grid {
+      grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+      gap: 1rem;
+  }
+  .produto-card .nome { font-size: 1rem; }
+  .produto-card .preco { font-size: 1.1rem; }
+  .card-footer { padding: 0.8rem; }
+  .add-to-cart-btn { width: 36px; height: 36px; font-size: 1rem; }
 }
+
+/* --- Header Scrolled (Efeito Vidro) --- */
 header.header-scrolled {
-  /* Fundo Laranja com 85% de opacidade (transparente) */
   background: linear-gradient(to right, rgba(153, 46, 0, 0.85), rgba(255, 115, 0, 0.85)) !important;
-  
-  /* Efeito de vidro fosco (Borrar o que passa por trás) */
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px); /* Safari */
-  
-  /* Diminui a sombra para ficar mais leve */
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  
-  /* Opcional: Torna o header um pouco mais fino ao rolar */
   padding: 0.5rem 0;
-  
-  /* Garante que a transição seja suave */
   transition: all 0.4s ease;
 }
