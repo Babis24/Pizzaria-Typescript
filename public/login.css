@@ -1,5 +1,7 @@
+/* public/login.css */
+
 :root {
-  --primary-color: #cf4d0c; /* Fundo laranja */
+  --primary-color: #e34f05; /* Fundo laranja */
   --card-background: #ffffff;
   --text-color: #333;
   --border-color: #dee2e6;
@@ -9,12 +11,9 @@ body {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   
-  /* --- ALTERAÇÃO DO DEGRADÊ AQUI --- */
-  /* De um Laranja bem escuro (#992e00) para um Laranja vibrante (#ff7300) */
+  /* Fundo Degradê Rico */
   background: linear-gradient(135deg, #992e00, #ff7300);
-  
-  /* Garante que o degradê fique fixo mesmo se houver rolagem */
-  background-attachment: fixed; 
+  background-attachment: fixed;
   background-size: cover;
   
   color: var(--text-color);
@@ -31,7 +30,6 @@ body {
   align-items: center;
   padding: 1rem 3rem;
   background-color: transparent;
-  box-shadow: none;
   width: 100%;
   box-sizing: border-box;
   color: white;
@@ -40,77 +38,64 @@ body {
 }
 
 .login-header .logo {
-  height: 100px;
+  height: 100px; /* Tamanho ajustado conforme pedido anterior */
   width: 100px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid white;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+/* --- Botão "Quem Somos Nós" Padronizado --- */
 .login-header .main-nav a {
-  color: white;
-  text-decoration: none;
+  background-color: #ffffff; 
+  color: #333333;            
   font-weight: bold;
-  margin-left: 1.5rem;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  transition: opacity 0.2s;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 10px 24px;       
+  border-radius: 30px;       
+  margin-left: 1rem;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
+
 .login-header .main-nav a:hover {
-  opacity: 0.8;
-  text-decoration: underline;
+  background-color: #f0f0f0; 
+  color: #000000;            
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  opacity: 1;
 }
 
 /* --- Container Principal --- */
 .login-container {
   display: flex;
-  flex-direction: column; /* Um em cima do outro */
-  align-items: center;      /* Centraliza horizontalmente */
+  flex-direction: column;
+  align-items: center;
   flex-grow: 1;
   width: 100%;
   box-sizing: border-box;
 
-  /* --- A MUDANÇA ESTÁ AQUI --- */
+  /* Alinhamento no Topo */
+  justify-content: flex-start;
+  padding-top: 3rem; 
   
-  /* 1. Desliga o alinhamento central automático vertical */
-  justify-content: flex-start; 
-  
-  /* 2. Define manualmente a distância do topo (Header) */
-  /* Quanto MENOR este número, mais para CIMA ele vai. */
-  /* Tente 2rem, 4rem ou 6rem. */
-  padding-top: 1%;; 
-  
-  padding-bottom: 5%; 
+  padding-bottom: 2rem; 
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
-/* Ajuste para telas de celular (para não subir demais e cortar) */
 @media (max-width: 768px) {
   .login-container {
-  display: flex;
-  flex-direction: column; /* Um em cima do outro */
-  align-items: center;    /* Centraliza horizontalmente (esquerda/direita) */
-  flex-grow: 1;
-  width: 100%;
-  box-sizing: border-box;
-
-  /* --- O SEGREDO ESTÁ AQUI --- */
-  
-  /* 1. Mude de 'center' para 'flex-start'. 
-     Isso joga tudo lá pra cima, colado no header. */
-  justify-content: flex-start; 
-  
-  /* 2. Use o padding-top para empurrar um pouco para baixo.
-     Se quiser MAIS ALTO, diminua este número (ex: 1rem).
-     Se quiser MAIS BAIXO, aumente este número (ex: 8rem). */
-  padding-top: 2rem; 
-  
-  /* Mantemos um respiro nas laterais e embaixo */
-  padding-bottom: 1rem; 
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
+    padding-top: 2rem;
+  }
+  .login-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 /* --- Título de Bem-Vindo --- */
@@ -129,16 +114,11 @@ body {
   background: var(--card-background);
   padding: 3rem;
   border-radius: 20px;
-  
-  /* Sombra e efeito flutuante */
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
-  
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 400px;
   text-align: center;
   position: relative;
-  
-  /* Animação */
   animation: popupFadeIn 0.6s ease-out forwards;
 }
 
@@ -158,6 +138,7 @@ body {
   margin-top: 0;
   margin-bottom: 2rem;
   font-size: 1.8rem;
+  font-weight: 700;
 }
 
 /* --- Formulário --- */
@@ -166,7 +147,7 @@ body {
   text-align: left;
 }
 .form-group label {
-  display: blbuttonock;
+  display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: #555;
@@ -188,21 +169,7 @@ body {
   box-shadow: 0 0 0 4px rgba(227, 79, 5, 0.2);
 }
 
-/* --- Botão Principal --- */
-[type="submit"] {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 0.5rem;
-}
-
+/* --- Botão Principal (Degradê Laranja) --- */
 button[type="submit"] {
   width: 100%;
   padding: 1rem;
@@ -214,12 +181,17 @@ button[type="submit"] {
   cursor: pointer;
   margin-top: 0.5rem;
   
-  /* --- DEGRADÊ NO BOTÃO --- */
-  /* Vai da esquerda (laranja mais escuro) para a direita (laranja claro) */
   background-image: linear-gradient(to right, #d64100, #ff9100);
-  background-size: 200% auto; /* Prepara o efeito de hover */
-  transition: 0.4s; /* Transição suave */
+  background-size: 200% auto;
+  transition: 0.4s;
 }
+
+button[type="submit"]:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
 /* --- Links de Alternar --- */
 .toggle-view {
   margin-top: 2rem;
@@ -247,21 +219,19 @@ button[type="submit"] {
 .success { background-color: #d1e7dd; color: #0f5132; }
 .error { background-color: #ffebe9; color: #c92a2a; }
 
-/* --- Rodapé Transparente --- */
+/* --- Rodapé --- */
 .contato-footer {
   text-align: center;
   padding: 1rem;
   background-color: transparent;
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.85rem;
-  /* Garante que o rodapé não atrapalhe o layout flex */
-  flex-shrink: 0; 
+  flex-shrink: 0;
+  margin-top: auto; /* Empurra pro final se sobrar espaço */
 }
 .contato-footer h3 {
   color: white;
   font-size: 1rem;
   margin-bottom: 0.3rem;
 }
-.contato-footer p {
-    margin: 0;
-}
+.contato-footer p { margin: 0; }
